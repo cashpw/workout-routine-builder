@@ -1,0 +1,5 @@
+#+title: Dev Log
+
+* [2024-01-26 Fri]
+
+- Created the repo
