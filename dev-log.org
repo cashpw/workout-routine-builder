@@ -3,3 +3,5 @@
 * [2024-01-26 Fri]
 
 - Created the repo
+- Started off with a base =index.html=, =app.js=, [[https://livejs.com/][=live.js=]], and =styles.css=
+- Switched to [[https://docs.flutter.dev/get-started/install][flutter]]
