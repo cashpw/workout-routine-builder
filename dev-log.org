@@ -11,6 +11,7 @@ Next steps:
 
 1. Extract routine entries into new component (=RoutineEntry=)
 2. Extract =Select= into new component (=SelectRoutineEntry=)
+3. Remaining tasks in [[github:cashpw/workout-routine-builder/milestone/1][v0.1.0 milestone]]
 
 * [2024-01-26 Fri]
 
