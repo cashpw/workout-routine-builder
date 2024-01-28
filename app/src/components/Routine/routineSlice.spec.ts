@@ -24,20 +24,20 @@ describe('routine reducer', () => {
   });
 
   it('should handle adding an exercise', () => {
-    const actual = routineReducer(initialState, addExercise(barbellCurl));
+    const actual = routineReducer(initialState, addExercise(barbellCurl.id));
 
-    expect(actual.exercises).toEqual([barbellCurl]);
+    expect(actual.exercises).toEqual([barbellCurl.id]);
   });
 
   it('should handle adding more than one exercise', () => {
-    let actual = routineReducer(initialState, addExercise(barbellCurl));
-    actual = routineReducer(actual, addExercise(barbellHipThrust));
-    actual = routineReducer(actual, addExercise(barbellBenchPress));
+    let actual = routineReducer(initialState, addExercise(barbellCurl.id));
+    actual = routineReducer(actual, addExercise(barbellHipThrust.id));
+    actual = routineReducer(actual, addExercise(barbellBenchPress.id));
 
     expect(actual.exercises).toEqual([
-      barbellCurl,
-      barbellHipThrust,
-      barbellBenchPress,
+      barbellCurl.id,
+      barbellHipThrust.id,
+      barbellBenchPress.id,
     ]);
   });
 });

@@ -1,9 +1,12 @@
 import { Localization } from 'data/exercise';
 
-export interface Exercise {
-  // A unique identifier
-  id: number;
+export type ExerciseId = number;
+export type ExerciseName = string;
 
-  // A unique identifier
-  name: string;
+export interface Exercise {
+  // A unique identifier for the entire Exercise
+  id: ExerciseId;
+
+  // A unique identifier for i18n
+  name: ExerciseName;
 }
