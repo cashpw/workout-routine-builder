@@ -27,8 +27,12 @@ export function Routine() {
       <ul
         className={styles.routine}
       >
-        {exercises.map(exercise => (
-          <li>{exercise.name}: {t(exercise.name)}</li>
+        {exercises.map((exercise, index) => (
+          <li
+            key={index}
+            >
+            {exercise.name}: {t(exercise.name)}
+          </li>
         ))}
       </ul>
       <button
