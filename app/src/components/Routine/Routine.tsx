@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import {
   barbellBenchPress,
-} from 'data/exercises';
+} from 'exercises/exercises';
 import {
   useAppSelector,
   useAppDispatch,

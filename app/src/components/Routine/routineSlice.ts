@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { Exercise } from 'data/exercise';
+import { Exercise } from 'exercises/exercise';
 
 export interface RoutineState {
   exercises: Exercise[];

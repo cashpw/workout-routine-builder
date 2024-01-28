@@ -1,9 +1,9 @@
-import { Exercise } from 'data/exercise';
+import { Exercise } from 'exercises/exercise';
 import {
   barbellCurl,
   barbellBenchPress,
   barbellHipThrust,
-} from 'data/exercises';
+} from 'exercises/exercises';
 
 import routineReducer, {
   RoutineState,

@@ -1,4 +1,4 @@
-import { Exercise } from 'data/exercise';
+import { Exercise } from './exercise';
 
 export const barbellCurl: Exercise = {
   id: 1,
