@@ -31,7 +31,7 @@ export function Routine() {
           <li
             key={index}
             >
-            {exercise.name}: {t(exercise.name)}
+            {t(exercise.name)}
           </li>
         ))}
       </ul>
