@@ -1,5 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
+import {
+  barbellBenchPress,
+} from 'data/exercises';
 import {
   useAppSelector,
   useAppDispatch,
@@ -12,6 +16,7 @@ import {
 import styles from './Routine.module.css';
 
 export function Routine() {
+  const { t } = useTranslation();
   const exercises = useAppSelector(selectExercises);
   const name = useAppSelector(selectName);
   const dispatch = useAppDispatch();
@@ -23,12 +28,12 @@ export function Routine() {
         className={styles.routine}
       >
         {exercises.map(exercise => (
-          <li>{exercise}</li>
+          <li>{exercise.name}: {t(exercise.name)}</li>
         ))}
       </ul>
       <button
         aria-label="Add exercise"
-        onClick={() => dispatch(addExercise("Foo"))}
+        onClick={() => dispatch(addExercise(barbellBenchPress))}
       >
         Add exercise
       </button>
