@@ -1,5 +1,17 @@
 #+title: Dev Log
 
+* [2024-01-28 Sun]
+
+- Switched off of flutter earlier, now on React/Redux to focus on web view
+- Implemented i18n support with =i18next=
+  - Only =en_US= for now
+- Implemented routine selection with =react-select=
+
+Next steps:
+
+1. Extract routine entries into new component (=RoutineEntry=)
+2. Extract =Select= into new component (=SelectRoutineEntry=)
+
 * [2024-01-26 Fri]
 
 - Created the repo

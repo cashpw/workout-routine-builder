@@ -3,7 +3,7 @@ import {
   barbellCurl,
   barbellBenchPress,
   barbellHipThrust,
-} from 'exercises/exercises';
+} from 'exercises/forTests';
 
 import routineReducer, {
   RoutineState,

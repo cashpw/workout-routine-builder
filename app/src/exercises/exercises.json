@@ -1,0 +1,16 @@
+{
+  "all": [
+    {
+      "id": 1,
+      "name": "barbellcurl"
+    },
+    {
+      "id": 2,
+      "name": "barbellbenchpress"
+    },
+    {
+      "id": 3,
+      "name": "barbellhipthrust"
+    }
+  ]
+}

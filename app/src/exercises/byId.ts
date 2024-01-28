@@ -2,9 +2,9 @@ import type {
   Exercise,
   ExerciseId,
 } from './exercise';
-import * as exercises from './exercises';
+import exercisesAsList from './asList';
 
-const exercisesById = Object.values(exercises).reduce((acc: {[key: ExerciseId]: Exercise}, exercise) => {
+const exercisesById = exercisesAsList.reduce((acc: {[key: ExerciseId]: Exercise}, exercise) => {
   acc[exercise.id] = exercise;
 
   return acc

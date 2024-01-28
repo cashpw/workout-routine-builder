@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Select, { ActionMeta, OnChangeValue } from 'react-select';
 import { useTranslation } from 'react-i18next';
 
-import { barbellBenchPress } from 'exercises/exercises';
 import {
   ExerciseOption,
   getExerciseOptions,

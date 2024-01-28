@@ -9,7 +9,7 @@ import {
   Exercise,
   ExerciseId,
 } from './exercise';
-import * as exercises from './exercises';
+import exercises from './asList';
 
 export type ExerciseOption = {
   readonly value: ExerciseId;
