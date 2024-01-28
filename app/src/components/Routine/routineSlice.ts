@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { RootState } from 'app/store';
+import { Exercise } from 'data/exercise';
 
 export interface RoutineState {
-  exercises: string[];
+  exercises: Exercise[];
   name: string;
 }
 
@@ -16,7 +17,7 @@ export const routineSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    addExercise: (state, action: PayloadAction<string>) => {
+    addExercise: (state, action: PayloadAction<Exercise>) => {
       state.exercises.push(action.payload);
     },
   },

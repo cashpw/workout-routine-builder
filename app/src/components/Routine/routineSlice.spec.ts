@@ -1,3 +1,10 @@
+import { Exercise } from 'data/exercise';
+import {
+  barbellCurl,
+  barbellBenchPress,
+  barbellHipThrust,
+} from 'data/exercises';
+
 import routineReducer, {
   RoutineState,
   addExercise,
@@ -17,16 +24,20 @@ describe('routine reducer', () => {
   });
 
   it('should handle adding an exercise', () => {
-    const actual = routineReducer(initialState, addExercise("Foo"));
+    const actual = routineReducer(initialState, addExercise(barbellCurl));
 
-    expect(actual.exercises).toEqual(["Foo"]);
+    expect(actual.exercises).toEqual([barbellCurl]);
   });
 
   it('should handle adding more than one exercise', () => {
-    let actual = routineReducer(initialState, addExercise("Foo"));
-    actual = routineReducer(actual, addExercise("Bar"));
-    actual = routineReducer(actual, addExercise("Baz"));
+    let actual = routineReducer(initialState, addExercise(barbellCurl));
+    actual = routineReducer(actual, addExercise(barbellHipThrust));
+    actual = routineReducer(actual, addExercise(barbellBenchPress));
 
-    expect(actual.exercises).toEqual(["Foo", "Bar", "Baz"]);
+    expect(actual.exercises).toEqual([
+      barbellCurl,
+      barbellHipThrust,
+      barbellBenchPress,
+    ]);
   });
 });
