@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import { Routine } from 'components/Routine/Routine';
 import './App.css';
 
