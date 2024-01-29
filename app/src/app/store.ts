@@ -2,6 +2,7 @@ import {
   Action,
   ThunkAction,
   createListenerMiddleware,
+  isAnyOf,
   configureStore,
 } from '@reduxjs/toolkit';
 import history from 'history/browser';
@@ -9,6 +10,7 @@ import qs from 'qs';
 
 import routineReducer, {
   addExercise,
+  removeExercise,
 } from 'components/Routine/routineSlice';
 
 function getStateFromQueryParameters() {
@@ -17,7 +19,7 @@ function getStateFromQueryParameters() {
 
 const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
-  actionCreator: addExercise,
+  matcher: isAnyOf(addExercise, removeExercise),
   effect: async (action, listenerApi) => {
     storeStateInQueryParameters(listenerApi.getState() as {});
   },

@@ -20,10 +20,16 @@ export const routineSlice = createSlice({
     addExercise: (state, action: PayloadAction<ExerciseId>) => {
       state.exercises.push(action.payload);
     },
+    removeExercise: (state, action: PayloadAction<number>) => {
+      state.exercises.splice(action.payload, 1);
+    },
   },
 });
 
 export const selectExercises = (state: RootState) => state.routine.exercises;
 export const selectName = (state: RootState) => state.routine.name;
-export const { addExercise } = routineSlice.actions;
+export const {
+  addExercise,
+  removeExercise,
+} = routineSlice.actions;
 export default routineSlice.reducer;

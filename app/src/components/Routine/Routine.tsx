@@ -12,6 +12,7 @@ import {
 } from 'app/hooks';
 import {
   addExercise,
+  removeExercise,
   selectExercises,
   selectName,
 } from './routineSlice';
@@ -31,7 +32,7 @@ export function Routine() {
 
   return (
     <>
-      <span>[DEBUG] Exercises: {exercises.join(", ")}</span>
+      <span>[DEBUG] Exercises: {exercises.join(', ')}</span>
       <br></br>
       <br></br>
       <br></br>
@@ -45,6 +46,12 @@ export function Routine() {
               key={index}
               >
               {t(exercisesById[id].name)}
+              <button
+                aria-label='Delete'
+                onClick={() => dispatch(removeExercise(index))}
+              >
+                X
+              </button>
             </li>
           )})}
       </ul>
@@ -57,10 +64,10 @@ export function Routine() {
                     }
                   }}
         options={options}
-        name="exercises"
+        name='exercises'
       />
       <button
-        aria-label="Add exercise"
+        aria-label='Add exercise'
         onClick={() => dispatch(addExercise(selectedExercise))}
       >
         Add exercise
