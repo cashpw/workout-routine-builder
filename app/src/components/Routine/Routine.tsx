@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select, { ActionMeta, OnChangeValue } from 'react-select';
 import { useTranslation } from 'react-i18next';
+import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -73,14 +74,15 @@ export function Routine() {
                     }
                   }}
         options={options}
-        name='exercises'
+        name="exercises"
       />
-      <button
-        aria-label='Add exercise'
+      <Button
+        aria-label="Add exercise"
+        variant="contained"
         onClick={() => dispatch(addExercise(selectedExercise))}
       >
         Add exercise
-      </button>
+      </Button>
     </>
   );
 }
