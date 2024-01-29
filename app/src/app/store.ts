@@ -43,5 +43,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 
 function storeStateInQueryParameters(state: {}) {
   const queryString = qs.stringify(state);
-  history.replace(`/?=${queryString}`);
+  history.replace(`/?${queryString}`);
 }
