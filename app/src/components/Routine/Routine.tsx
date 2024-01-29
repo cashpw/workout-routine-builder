@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import Select, { ActionMeta, OnChangeValue } from 'react-select';
 import { useTranslation } from 'react-i18next';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import {
   ExerciseOption,
@@ -16,7 +21,7 @@ import {
   selectExercises,
   selectName,
 } from './routineSlice';
-import styles from './Routine.module.css';
+// import styles from './Routine.module.css';
 import exercisesById from 'exercises/byId';
 
 export function Routine() {
@@ -37,24 +42,28 @@ export function Routine() {
       <br></br>
       <br></br>
       <span>Name: {name}</span>
-      <ul
-        className={styles.routine}
-      >
+      <List>
         {exercises.map((id, index) => {
           return (
-            <li
+            <ListItem
               key={index}
+              secondaryAction={
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => dispatch(removeExercise(index))}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              }
+            >
+              <ListItemText
+                primary={t(exercisesById[id].name)}
               >
-              {t(exercisesById[id].name)}
-              <button
-                aria-label='Delete'
-                onClick={() => dispatch(removeExercise(index))}
-              >
-                X
-              </button>
-            </li>
+              </ListItemText>
+            </ListItem>
           )})}
-      </ul>
+      </List>
       <Select
         defaultValue={null}
         onChange={(value: OnChangeValue<ExerciseOption, false>,
