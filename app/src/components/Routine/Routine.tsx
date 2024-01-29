@@ -54,14 +54,14 @@ export function Routine() {
       <br></br>
       <br></br>
       <br></br>
-      <span>{name}</span>
+      <span>Name: {name}</span>
       <ul
         className={styles.routine}
       >
-        {exercises.map((id) => {
+        {exercises.map((id, index) => {
           return (
             <li
-              key={id}
+              key={index}
               >
               {t(exercisesById[id].name)}
             </li>
