@@ -1,4 +1,5 @@
-import { Exercise } from 'exercises/exercise';
+import type { Exercise } from 'types';
+
 import {
   barbellCurl,
   barbellBenchPress,

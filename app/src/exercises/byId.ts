@@ -1,7 +1,7 @@
 import type {
   Exercise,
   ExerciseId,
-} from './exercise';
+} from 'types';
 import exercisesAsList from './asList';
 
 const exercisesById = exercisesAsList.reduce((acc: {[key: ExerciseId]: Exercise}, exercise) => {

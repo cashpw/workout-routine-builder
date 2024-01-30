@@ -1,4 +1,4 @@
-import { Exercise } from './exercise';
+import type { Exercise } from 'types';
 
 export const barbellCurl: Exercise = {
   id: 1,

@@ -1,5 +1,6 @@
+import type { Exercise } from 'types';
+
 import exercises from './exercises.json';
-import type { Exercise } from './exercise';
 
 const exerciseList: Exercise[] = exercises.all;
 

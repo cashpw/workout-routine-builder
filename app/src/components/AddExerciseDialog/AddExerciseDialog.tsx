@@ -1,3 +1,5 @@
+import type { Exercise } from 'types';
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/material/styles';
@@ -11,8 +13,6 @@ import {
   IconButton,
 } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
-
-import type { Exercise } from 'exercises/exercise';
 
 export interface AddExerciseDialogProps {
   open: boolean;
