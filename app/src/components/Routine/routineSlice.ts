@@ -37,7 +37,13 @@ export const routineSlice = createSlice({
       });
     },
     removeExerciseSet: (state, action: PayloadAction<number>) => {
-      state.exerciseSets.splice(action.payload, 1);
+      const exerciseSetsIndex = action.payload;
+      if (exerciseSetsIndex < 0 || exerciseSetsIndex >= state.exerciseSets.length) {
+        // TODO: Handle error
+        return;
+      }
+
+      state.exerciseSets.splice(exerciseSetsIndex, 1);
     },
     addCountRepetition: (state, action: PayloadAction<number>) => {
       const exerciseSetsIndex = action.payload;

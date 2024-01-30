@@ -86,6 +86,36 @@ describe('routine reducer', () => {
       ]);
     });
 
+    it('should not remove an exercise set when index < 0', () => {
+      let state = addExerciseSets(initialState, [
+        barbellCurl.id,
+        barbellHipThrust.id,
+        barbellBenchPress.id,
+      ]);
+      state = routineReducer(state, removeExerciseSet(-1));
+
+      expect(state.exerciseSets).toEqual([
+        { exerciseId: barbellCurl.id, repetitions: [] },
+        { exerciseId: barbellHipThrust.id, repetitions: [] },
+        { exerciseId: barbellBenchPress.id, repetitions: [] },
+      ]);
+    });
+
+    it('should not remove an exercise set when index > max', () => {
+      let state = addExerciseSets(initialState, [
+        barbellCurl.id,
+        barbellHipThrust.id,
+        barbellBenchPress.id,
+      ]);
+      state = routineReducer(state, removeExerciseSet(4));
+
+      expect(state.exerciseSets).toEqual([
+        { exerciseId: barbellCurl.id, repetitions: [] },
+        { exerciseId: barbellHipThrust.id, repetitions: [] },
+        { exerciseId: barbellBenchPress.id, repetitions: [] },
+      ]);
+    });
+
     it('should remove more than one exercise set', () => {
       let state = addExerciseSets(initialState, [
         barbellCurl.id,
