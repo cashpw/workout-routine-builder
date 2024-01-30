@@ -8,12 +8,12 @@ import {
 
 import routineReducer, {
   RoutineState,
-  addExercise,
+  addExerciseSet,
 } from './routineSlice';
 
 describe('routine reducer', () => {
   const initialState: RoutineState = {
-    exercises: [],
+    exerciseSets: [],
     name: "",
   };
 
@@ -25,20 +25,25 @@ describe('routine reducer', () => {
   });
 
   it('should handle adding an exercise', () => {
-    const actual = routineReducer(initialState, addExercise(barbellCurl.id));
+    const actual = routineReducer(initialState, addExerciseSet(barbellCurl.id));
 
-    expect(actual.exercises).toEqual([barbellCurl.id]);
+    expect(actual.exerciseSets).toEqual([
+      {
+        exerciseId: barbellCurl.id,
+        repetitions: [],
+      }
+    ]);
   });
 
   it('should handle adding more than one exercise', () => {
-    let actual = routineReducer(initialState, addExercise(barbellCurl.id));
-    actual = routineReducer(actual, addExercise(barbellHipThrust.id));
-    actual = routineReducer(actual, addExercise(barbellBenchPress.id));
+    let actual = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+    actual = routineReducer(actual, addExerciseSet(barbellHipThrust.id));
+    actual = routineReducer(actual, addExerciseSet(barbellBenchPress.id));
 
-    expect(actual.exercises).toEqual([
-      barbellCurl.id,
-      barbellHipThrust.id,
-      barbellBenchPress.id,
+    expect(actual.exerciseSets).toEqual([
+      { exerciseId: barbellCurl.id, repetitions: [] },
+      { exerciseId: barbellHipThrust.id, repetitions: [] },
+      { exerciseId: barbellBenchPress.id, repetitions: [] },
     ]);
   });
 });

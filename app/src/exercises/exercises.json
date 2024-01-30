@@ -2,15 +2,27 @@
   "all": [
     {
       "id": 1,
-      "name": "barbellcurl"
+      "name": "barbellcurl",
+      "repetitionTypes": [
+        "WEIGHT",
+        "COUNT"
+      ]
     },
     {
       "id": 2,
-      "name": "barbellbenchpress"
+      "name": "barbellbenchpress",
+      "repetitionTypes": [
+        "WEIGHT",
+        "COUNT"
+      ]
     },
     {
       "id": 3,
-      "name": "barbellhipthrust"
+      "name": "barbellhipthrust",
+      "repetitionTypes": [
+        "WEIGHT",
+        "COUNT"
+      ]
     }
   ]
 }

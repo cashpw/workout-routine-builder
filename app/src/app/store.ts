@@ -9,8 +9,8 @@ import history from 'history/browser';
 import qs from 'qs';
 
 import routineReducer, {
-  addExercise,
-  removeExercise,
+  addExerciseSet,
+  removeExerciseSet,
 } from 'components/Routine/routineSlice';
 
 function getStateFromQueryParameters() {
@@ -19,7 +19,7 @@ function getStateFromQueryParameters() {
 
 const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
-  matcher: isAnyOf(addExercise, removeExercise),
+  matcher: isAnyOf(addExerciseSet, removeExerciseSet),
   effect: async (action, listenerApi) => {
     storeStateInQueryParameters(listenerApi.getState() as {});
   },

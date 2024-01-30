@@ -10,9 +10,9 @@ import {
   useAppDispatch,
 } from 'app/hooks';
 import {
-  addExercise,
-  removeExercise,
-  selectExercises,
+  addExerciseSet,
+  removeExerciseSet,
+  selectExerciseSets,
   selectName,
 } from './routineSlice';
 // import styles from './Routine.module.css';
@@ -24,24 +24,20 @@ import AddExerciseDialog from 'components/AddExerciseDialog/AddExerciseDialog';
 export default function Routine() {
   const { t } = useTranslation();
   const [addExerciseDialogOpen, setAddExerciseDialogOpen] = useState(false);
-  const exercises = useAppSelector(selectExercises);
+  const exerciseSets = useAppSelector(selectExerciseSets);
   const name = useAppSelector(selectName);
   const dispatch = useAppDispatch();
 
   return (
     <>
-      <span>[DEBUG] Exercises: {exercises.join(', ')}</span>
-      <br></br>
-      <br></br>
-      <br></br>
       <span>Name: {name}</span>
       <List>
-        {exercises.map((id, index) => {
+        {exerciseSets.map(({exerciseId, repetitions}, index) => {
           return (
             <RoutineItem
               key={index.toString()}
-              handleRemoveExercise={() => dispatch(removeExercise(index))}
-              name={t(exercisesById[id].name)}
+              handleRemoveExercise={() => dispatch(removeExerciseSet(index))}
+              name={t(exercisesById[exerciseId].name)}
             />
           )})}
       </List>
@@ -56,7 +52,7 @@ export default function Routine() {
         exercises={exercisesAsList}
         onClose={(id: number|undefined) => {
           if (id !== undefined) {
-            dispatch(addExercise(id));
+            dispatch(addExerciseSet(id));
           }
           setAddExerciseDialogOpen(false);
         }}
