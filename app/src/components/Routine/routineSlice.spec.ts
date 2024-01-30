@@ -38,54 +38,58 @@ describe('routine reducer', () => {
     });
   });
 
-  it('should handle adding an exercise set', () => {
-    const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+  describe('addExerciseSet', () => {
+    it('should add an exercise set', () => {
+      const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
 
-    expect(state.exerciseSets).toEqual([{
-      exerciseId: barbellCurl.id,
-      repetitions: [],
-    }]);
+      expect(state.exerciseSets).toEqual([{
+        exerciseId: barbellCurl.id,
+        repetitions: [],
+      }]);
+    });
+
+    it('should add more than one exercise set', () => {
+      const state = addExerciseSets(initialState, [
+        barbellCurl.id,
+        barbellHipThrust.id,
+        barbellBenchPress.id,
+      ]);
+
+      expect(state.exerciseSets).toEqual([
+        { exerciseId: barbellCurl.id, repetitions: [] },
+        { exerciseId: barbellHipThrust.id, repetitions: [] },
+        { exerciseId: barbellBenchPress.id, repetitions: [] },
+      ]);
+    });
   });
 
-  it('should handle adding more than one exercise set', () => {
-    const state = addExerciseSets(initialState, [
-      barbellCurl.id,
-      barbellHipThrust.id,
-      barbellBenchPress.id,
-    ]);
+  describe('removeExerciseSet', () => {
+    it('should remove an exercise set', () => {
+      let state = addExerciseSets(initialState, [
+        barbellCurl.id,
+        barbellHipThrust.id,
+        barbellBenchPress.id,
+      ]);
+      state = routineReducer(state, removeExerciseSet(1));
 
-    expect(state.exerciseSets).toEqual([
-      { exerciseId: barbellCurl.id, repetitions: [] },
-      { exerciseId: barbellHipThrust.id, repetitions: [] },
-      { exerciseId: barbellBenchPress.id, repetitions: [] },
-    ]);
-  });
+      expect(state.exerciseSets).toEqual([
+        { exerciseId: barbellCurl.id, repetitions: [] },
+        { exerciseId: barbellBenchPress.id, repetitions: [] },
+      ]);
+    });
 
-  it('should handle removing an exercise set', () => {
-    let state = addExerciseSets(initialState, [
-      barbellCurl.id,
-      barbellHipThrust.id,
-      barbellBenchPress.id,
-    ]);
-    state = routineReducer(state, removeExerciseSet(1));
+    it('should remove more than one exercise set', () => {
+      let state = addExerciseSets(initialState, [
+        barbellCurl.id,
+        barbellHipThrust.id,
+        barbellBenchPress.id,
+      ]);
+      state = routineReducer(state, removeExerciseSet(1));
+      state = routineReducer(state, removeExerciseSet(0));
 
-    expect(state.exerciseSets).toEqual([
-      { exerciseId: barbellCurl.id, repetitions: [] },
-      { exerciseId: barbellBenchPress.id, repetitions: [] },
-    ]);
-  });
-
-  it('should handle removing more than one exercise set', () => {
-    let state = addExerciseSets(initialState, [
-      barbellCurl.id,
-      barbellHipThrust.id,
-      barbellBenchPress.id,
-    ]);
-    state = routineReducer(state, removeExerciseSet(1));
-    state = routineReducer(state, removeExerciseSet(0));
-
-    expect(state.exerciseSets).toEqual([
-      { exerciseId: barbellBenchPress.id, repetitions: [] },
-    ]);
+      expect(state.exerciseSets).toEqual([
+        { exerciseId: barbellBenchPress.id, repetitions: [] },
+      ]);
+    });
   });
 });
