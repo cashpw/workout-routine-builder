@@ -1,13 +1,13 @@
-import type { Repetition } from 'types';
+import type { Repetition as RepetitionType } from 'types';
 
-import React from 'react';
 import {
   List,
-  ListItem,
 } from '@mui/material';
 
+import Repetition from 'components/Repetition/Repetition';
+
 export interface RepetitionsProps {
-  repetitions: Repetition[];
+  repetitions: RepetitionType[];
 }
 
 export default function Repetitions(props: RepetitionsProps) {
@@ -18,12 +18,10 @@ export default function Repetitions(props: RepetitionsProps) {
   return (
     <List>
       {repetitions.map((repetition, index) => (
-        <ListItem
+        <Repetition
           key={index}
-          divider={true}
-        >
-          {repetition.toString()}
-        </ListItem>
+          repetition={repetition}
+        />
       ))}
     </List>
   );
