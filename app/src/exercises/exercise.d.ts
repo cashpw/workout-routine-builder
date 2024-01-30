@@ -1,5 +1,3 @@
-import { Localization } from 'data/exercise';
-
 export type ExerciseId = number;
 export type ExerciseName = string;
 
