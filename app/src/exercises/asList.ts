@@ -1,5 +1,5 @@
 import exercises from './exercises.json';
-import { Exercise } from './exercise';
+import type { Exercise } from './exercise';
 
 const exerciseList: Exercise[] = exercises.all;
 
