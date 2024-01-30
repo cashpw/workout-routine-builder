@@ -28,6 +28,7 @@ export default function RoutineItem(props: RoutineItemProps) {
 
   return (
     <ListItem
+      divider={true}
       secondaryAction={
         <IconButton
           edge="end"

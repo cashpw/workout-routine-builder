@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Button,
+  Card,
+  CardContent,
+  Typography,
 } from '@mui/material';
 
 import {
@@ -26,27 +29,33 @@ export default function Routine() {
   const dispatch = useAppDispatch();
 
   return (
-    <>
-      <span>Name: {name}</span>
-      <RoutineItems
-        exerciseSets={exerciseSets}
-      />
-      <Button
-        variant="contained"
-        onClick={() => {setAddExerciseDialogOpen(true)}}
-      >
-        {t('addExerciseCallToAction')}
-      </Button>
-      <AddExerciseDialog
-        open={addExerciseDialogOpen}
-        exercises={exercisesAsList}
-        onClose={(id: number|undefined) => {
-          if (id !== undefined) {
-            dispatch(addExerciseSet(id));
-          }
-          setAddExerciseDialogOpen(false);
-        }}
-      />
-   </>
+    <Card
+      variant="outlined"
+    >
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Name: {name}
+        </Typography>
+        <RoutineItems
+          exerciseSets={exerciseSets}
+        />
+        <Button
+          variant="contained"
+          onClick={() => {setAddExerciseDialogOpen(true)}}
+        >
+          {t('addExerciseCallToAction')}
+        </Button>
+        <AddExerciseDialog
+          open={addExerciseDialogOpen}
+          exercises={exercisesAsList}
+          onClose={(id: number|undefined) => {
+            if (id !== undefined) {
+              dispatch(addExerciseSet(id));
+            }
+            setAddExerciseDialogOpen(false);
+          }}
+        />
+      </CardContent>
+   </Card>
   );
 }
