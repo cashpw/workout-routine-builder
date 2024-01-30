@@ -1,5 +1,6 @@
 import exercises from './exercises.json';
+import { Exercise } from './exercise';
 
-const exerciseList = exercises.all;
+const exerciseList: Exercise[] = exercises.all;
 
 export default exerciseList;
