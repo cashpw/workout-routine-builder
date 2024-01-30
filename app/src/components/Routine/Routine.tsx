@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import {
   Button,
   Card,
+  CardActions,
   CardContent,
-  Typography,
+  CardHeader,
 } from '@mui/material';
+import { Add as AddIcon } from '@mui/icons-material';
 
 import {
   useAppSelector,
@@ -32,30 +34,35 @@ export default function Routine() {
     <Card
       variant="outlined"
     >
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Name: {name}
-        </Typography>
-        <RoutineItems
-          exerciseSets={exerciseSets}
-        />
+      <CardHeader
+        title={`Name: ${name}`}
+      />
+      {exerciseSets.length > 0 && (
+        <CardContent>
+          <RoutineItems
+            exerciseSets={exerciseSets}
+          />
+        </CardContent>
+      )}
+      <AddExerciseDialog
+        open={addExerciseDialogOpen}
+        exercises={exercisesAsList}
+        onClose={(id: number|undefined) => {
+          if (id !== undefined) {
+            dispatch(addExerciseSet(id));
+          }
+          setAddExerciseDialogOpen(false);
+        }}
+      />
+      <CardActions>
         <Button
-          variant="contained"
+          size="small"
           onClick={() => {setAddExerciseDialogOpen(true)}}
+          startIcon={<AddIcon />}
         >
           {t('addExerciseCallToAction')}
         </Button>
-        <AddExerciseDialog
-          open={addExerciseDialogOpen}
-          exercises={exercisesAsList}
-          onClose={(id: number|undefined) => {
-            if (id !== undefined) {
-              dispatch(addExerciseSet(id));
-            }
-            setAddExerciseDialogOpen(false);
-          }}
-        />
-      </CardContent>
+      </CardActions>
    </Card>
   );
 }

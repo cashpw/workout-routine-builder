@@ -3,6 +3,7 @@ import type { ExerciseSet } from 'types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  List,
   ListItem,
   ListItemText,
   IconButton,
@@ -23,12 +24,13 @@ export default function RoutineItem(props: RoutineItemProps) {
   } = props;
   const {
     exerciseId,
+    repetitions,
   } = exerciseSet;
   const { t } = useTranslation();
 
   return (
     <ListItem
-      divider={true}
+      divider
       secondaryAction={
         <IconButton
           edge="end"
@@ -43,6 +45,16 @@ export default function RoutineItem(props: RoutineItemProps) {
         primary={t(exercisesById[exerciseId].name)}
       >
       </ListItemText>
+      <List>
+        {repetitions.map((repetition, index) => (
+          <ListItem
+            key={index}
+            divider={true}
+          >
+            {repetition.toString()}
+          </ListItem>
+        ))}
+      </List>
     </ListItem>
   );
 }
