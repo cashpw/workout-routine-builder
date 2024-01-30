@@ -16,7 +16,6 @@ import {
   selectName,
 } from './routineSlice';
 // import styles from './Routine.module.css';
-import exercisesById from 'exercises/byId';
 import exercisesAsList from 'exercises/asList';
 import RoutineItem from 'components/RoutineItem/RoutineItem';
 import AddExerciseDialog from 'components/AddExerciseDialog/AddExerciseDialog';
@@ -32,12 +31,12 @@ export default function Routine() {
     <>
       <span>Name: {name}</span>
       <List>
-        {exerciseSets.map(({exerciseId, repetitions}, index) => {
+        {exerciseSets.map((exerciseSet, index) => {
           return (
             <RoutineItem
               key={index.toString()}
+              exerciseSet={exerciseSet}
               handleRemoveExercise={() => dispatch(removeExerciseSet(index))}
-              name={t(exercisesById[exerciseId].name)}
             />
           )})}
       </List>

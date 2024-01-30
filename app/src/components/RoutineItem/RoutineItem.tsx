@@ -1,4 +1,7 @@
+import type { ExerciseSet } from 'types';
+
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ListItem,
   ListItemText,
@@ -6,22 +9,25 @@ import {
 } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
 
+import exercisesById from 'exercises/byId';
+
 export interface RoutineItemProps {
-  name: string;
-  key: string;
+  exerciseSet: ExerciseSet;
   handleRemoveExercise: () => void;
 }
 
 export default function RoutineItem(props: RoutineItemProps) {
   const {
-    name,
-    key,
     handleRemoveExercise,
+    exerciseSet,
   } = props;
+  const {
+    exerciseId,
+  } = exerciseSet;
+  const { t } = useTranslation();
 
   return (
     <ListItem
-      key={key}
       secondaryAction={
         <IconButton
           edge="end"
@@ -33,7 +39,7 @@ export default function RoutineItem(props: RoutineItemProps) {
       }
     >
       <ListItemText
-        primary={name}
+        primary={t(exercisesById[exerciseId].name)}
       >
       </ListItemText>
     </ListItem>
