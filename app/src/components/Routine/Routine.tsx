@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import {
+  Button,
+  List,
+} from '@mui/material';
 
 import {
   useAppSelector,
@@ -20,6 +18,7 @@ import {
 // import styles from './Routine.module.css';
 import exercisesById from 'exercises/byId';
 import exercisesAsList from 'exercises/asList';
+import RoutineItem from 'components/RoutineItem/RoutineItem';
 import AddExerciseDialog from 'components/AddExerciseDialog/AddExerciseDialog';
 
 export default function Routine() {
@@ -39,23 +38,11 @@ export default function Routine() {
       <List>
         {exercises.map((id, index) => {
           return (
-            <ListItem
-              key={index}
-              secondaryAction={
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={() => dispatch(removeExercise(index))}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              }
-            >
-              <ListItemText
-                primary={t(exercisesById[id].name)}
-              >
-              </ListItemText>
-            </ListItem>
+            <RoutineItem
+              key={index.toString()}
+              handleRemoveExercise={() => dispatch(removeExercise(index))}
+              name={t(exercisesById[id].name)}
+            />
           )})}
       </List>
       <Button
