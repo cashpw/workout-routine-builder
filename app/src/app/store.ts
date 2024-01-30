@@ -20,7 +20,7 @@ function getStateFromQueryParameters() {
 const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
   matcher: isAnyOf(addExerciseSet, removeExerciseSet),
-  effect: async (action, listenerApi) => {
+  effect: async (_, listenerApi) => {
     storeStateInQueryParameters(listenerApi.getState() as {});
   },
 });
