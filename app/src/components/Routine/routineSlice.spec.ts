@@ -1,4 +1,7 @@
-import type { Exercise } from 'types';
+import type {
+  Exercise,
+  ExerciseId,
+} from 'types';
 
 import {
   barbellCurl,
@@ -9,6 +12,7 @@ import {
 import routineReducer, {
   RoutineState,
   addExerciseSet,
+  removeExerciseSet,
 } from './routineSlice';
 
 describe('routine reducer', () => {
@@ -17,28 +21,38 @@ describe('routine reducer', () => {
     name: "",
   };
 
+  function addExerciseSets(initialState: RoutineState, ids: ExerciseId[]): RoutineState {
+    if (!ids.length) {
+      return initialState
+    }
+
+    return ids.slice(1).reduce((state, id) => {
+      return routineReducer(state, addExerciseSet(id));
+    }, routineReducer(initialState, addExerciseSet(ids[0])));
+  }
+
   it('should handle initial state', () => {
     expect(routineReducer(undefined, { type: 'unknown' })).toEqual({
-      exercises: [],
+      exerciseSets: [],
       name: "",
     });
   });
 
-  it('should handle adding an exercise', () => {
+  it('should handle adding an exercise set', () => {
     const actual = routineReducer(initialState, addExerciseSet(barbellCurl.id));
 
-    expect(actual.exerciseSets).toEqual([
-      {
-        exerciseId: barbellCurl.id,
-        repetitions: [],
-      }
-    ]);
+    expect(actual.exerciseSets).toEqual([{
+      exerciseId: barbellCurl.id,
+      repetitions: [],
+    }]);
   });
 
-  it('should handle adding more than one exercise', () => {
-    let actual = routineReducer(initialState, addExerciseSet(barbellCurl.id));
-    actual = routineReducer(actual, addExerciseSet(barbellHipThrust.id));
-    actual = routineReducer(actual, addExerciseSet(barbellBenchPress.id));
+  it('should handle adding more than one exercise set', () => {
+    const actual = addExerciseSets(initialState, [
+      barbellCurl.id,
+      barbellHipThrust.id,
+      barbellBenchPress.id,
+    ]);
 
     expect(actual.exerciseSets).toEqual([
       { exerciseId: barbellCurl.id, repetitions: [] },
