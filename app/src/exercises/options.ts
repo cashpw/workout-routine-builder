@@ -2,9 +2,7 @@ import type {
   TFunction,
 } from 'i18next';
 
-import {
-  ExerciseId,
-} from './exercise';
+import { ExerciseId } from './exercise';
 import exercises from './asList';
 
 export type ExerciseOption = {
