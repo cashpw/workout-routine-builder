@@ -7,12 +7,14 @@ import { RepetitionType } from 'types.d';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
+import exercisesById from 'exercises/byId';
 
 export interface RoutineState {
   name: string;
   exerciseSets: ExerciseSet[];
 }
 
+const exerciseIds = Object.keys(exercisesById).map(id => +id);
 const initialState: RoutineState = {
   name: "",
   exerciseSets: [],
@@ -24,8 +26,13 @@ export const routineSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     addExerciseSet: (state, action: PayloadAction<ExerciseId>) => {
+      const exerciseId = action.payload;
+      if (!exerciseIds.includes(exerciseId)) {
+        return;
+      }
+
       state.exerciseSets.push({
-        exerciseId: action.payload,
+        exerciseId: exerciseId,
         repetitions: [],
       });
     },

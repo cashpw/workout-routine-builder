@@ -49,6 +49,13 @@ describe('routine reducer', () => {
       }]);
     });
 
+   it('should not add an exercise set for an unknown ID', () => {
+      let state = routineReducer(initialState, addExerciseSet(-1));
+      state = routineReducer(initialState, addExerciseSet(100000));
+
+      expect(state.exerciseSets).toEqual([]);
+    });
+
     it('should add more than one exercise set', () => {
       const state = addExerciseSets(initialState, [
         barbellCurl.id,
