@@ -13,9 +13,11 @@ import routineReducer, {
   removeExerciseSet,
 } from 'components/Routine/routineSlice';
 
+/*
 function getStateFromQueryParameters() {
   return qs.parse(history.location.search);
 }
+*/
 
 const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
@@ -29,7 +31,7 @@ export const store = configureStore({
   reducer: {
     routine: routineReducer,
   },
-  preloadedState: getStateFromQueryParameters(),
+  // preloadedState: getStateFromQueryParameters(),
   middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 });
 
