@@ -1,8 +1,8 @@
 import type {
-  Exercise,
   ExerciseId,
 } from 'types';
 
+import { RepetitionType } from 'types.d';
 import {
   barbellCurl,
   barbellBenchPress,
@@ -12,6 +12,7 @@ import {
 import routineReducer, {
   RoutineState,
   addExerciseSet,
+  addCountRepetition,
   removeExerciseSet,
 } from './routineSlice';
 
@@ -92,4 +93,77 @@ describe('routine reducer', () => {
       ]);
     });
   });
+
+  describe('addCountRepetition', () => {
+    it('should add a count repetition', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+
+   it('should add a count repetition to the specified exerciseSet index', () => {
+      let state = addExerciseSets(initialState, [
+        barbellCurl.id,
+        barbellHipThrust.id,
+        barbellBenchPress.id,
+      ]);
+      state = routineReducer(state, addCountRepetition(1));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [],
+        },
+        {
+          exerciseId: barbellHipThrust.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 0,
+            },
+          ],
+        },
+        {
+          exerciseId: barbellBenchPress.id,
+          repetitions: [],
+        },
+      ]);
+    });
+
+    it('should not add a count repetition when index < 0', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(-1));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [],
+        },
+      ]);
+    });
+
+    it('should not add a count repetition when index > max', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(1));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [],
+        },
+      ]);
+    });
+  });
+
 });

@@ -3,6 +3,8 @@ import type {
   ExerciseSet,
 } from 'types';
 
+import { RepetitionType } from 'types.d';
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
@@ -30,6 +32,18 @@ export const routineSlice = createSlice({
     removeExerciseSet: (state, action: PayloadAction<number>) => {
       state.exerciseSets.splice(action.payload, 1);
     },
+    addCountRepetition: (state, action: PayloadAction<number>) => {
+      const exerciseSetsIndex = action.payload;
+      if (exerciseSetsIndex < 0 || exerciseSetsIndex >= state.exerciseSets.length) {
+        // TODO: Handle error
+        return;
+      }
+
+      state.exerciseSets[exerciseSetsIndex].repetitions.push({
+        type: RepetitionType.COUNT,
+        count: 0,
+      })
+    },
   },
 });
 
@@ -37,6 +51,7 @@ export const selectExerciseSets = (state: RootState) => state.routine.exerciseSe
 export const selectName = (state: RootState) => state.routine.name;
 export const {
   addExerciseSet,
+  addCountRepetition,
   removeExerciseSet,
 } = routineSlice.actions;
 export default routineSlice.reducer;

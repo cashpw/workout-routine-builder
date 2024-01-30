@@ -23,25 +23,27 @@ export enum WeightUnit {
   POUNDS,
 }
 
+export interface RepetitionBase {
+  type: RepetitionType;
+}
+
 export enum RepetitionType {
   COUNT,
   WEIGHT,
 }
 export type RepetitionTypeStrings = keyof typeof RepetitionType;
 
-export interface WeightRepetition extends Repetition {
+export interface WeightRepetition extends RepetitionBase {
   unit: WeightUnit;
   weight: number;
   count: number;
 }
 
-export interface CountRepetition extends Repetition {
+export interface CountRepetition extends RepetitionBase {
   count: number
 }
 
-export interface Repetition {
-  type: RepetitionType;
-}
+export type Repetition = WeightRepetition | CountRepetition;
 
 export interface ExerciseSet {
   exerciseId: ExerciseId;
