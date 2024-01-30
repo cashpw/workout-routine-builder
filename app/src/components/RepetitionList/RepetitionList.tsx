@@ -4,13 +4,13 @@ import {
   List,
 } from '@mui/material';
 
-import Repetition from 'components/Repetition/Repetition';
+import RepetitionItem from 'components/RepetitionItem/RepetitionItem';
 
-export interface RepetitionsProps {
+export interface RepetitionListProps {
   repetitions: RepetitionType[];
 }
 
-export default function Repetitions(props: RepetitionsProps) {
+export default function RepetitionList(props: RepetitionListProps) {
   const {
     repetitions,
   } = props;
@@ -18,7 +18,7 @@ export default function Repetitions(props: RepetitionsProps) {
   return (
     <List>
       {repetitions.map((repetition, index) => (
-        <Repetition
+        <RepetitionItem
           key={index}
           repetition={repetition}
         />

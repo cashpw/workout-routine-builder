@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
 
-import Repetitions from 'components/Repetitions/Repetitions';
+import RepetitionList from 'components/RepetitionList/RepetitionList';
 import exercisesById from 'exercises/byId';
 
 export interface RoutineItemProps {
@@ -46,7 +46,7 @@ export default function RoutineItem(props: RoutineItemProps) {
         primary={exerciseName}
       >
       </ListItemText>
-      <Repetitions
+      <RepetitionList
         repetitions={repetitions}
       />
     </ListItem>
