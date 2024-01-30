@@ -3,13 +3,13 @@ import type { ExerciseSet } from 'types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  List,
   ListItem,
   ListItemText,
   IconButton,
 } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
 
+import Repetitions from 'components/Repetitions/Repetitions';
 import exercisesById from 'exercises/byId';
 
 export interface RoutineItemProps {
@@ -27,6 +27,7 @@ export default function RoutineItem(props: RoutineItemProps) {
     repetitions,
   } = exerciseSet;
   const { t } = useTranslation();
+  const exerciseName = t(exercisesById[exerciseId].name);
 
   return (
     <ListItem
@@ -42,19 +43,12 @@ export default function RoutineItem(props: RoutineItemProps) {
       }
     >
       <ListItemText
-        primary={t(exercisesById[exerciseId].name)}
+        primary={exerciseName}
       >
       </ListItemText>
-      <List>
-        {repetitions.map((repetition, index) => (
-          <ListItem
-            key={index}
-            divider={true}
-          >
-            {repetition.toString()}
-          </ListItem>
-        ))}
-      </List>
+      <Repetitions
+        repetitions={repetitions}
+      />
     </ListItem>
   );
 }
