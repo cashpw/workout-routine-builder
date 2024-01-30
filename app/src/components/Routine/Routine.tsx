@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -24,6 +25,7 @@ import {
 } from './routineSlice';
 // import styles from './Routine.module.css';
 import exercisesById from 'exercises/byId';
+import exercisesAsList from 'exercises/asList';
 
 export function Routine() {
   const { t } = useTranslation();
@@ -83,6 +85,22 @@ export function Routine() {
       >
         Add exercise
       </Button>
+      <List>
+        {exercisesAsList.map((exercise, index) => (
+          <ListItem
+            disablePadding
+            key={index}
+          >
+            <ListItemButton
+              onClick={() => dispatch(addExercise(exercise.id))}
+            >
+              <ListItemText
+                primary={t(exercise.name)}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </>
   );
 }
