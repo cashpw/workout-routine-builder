@@ -1,5 +1,13 @@
 #+title: Dev Log
 
+* [2024-01-30 Tue]
+
+Next steps:
+
+1. Add concept of sets
+
+   Should probably name it =Set=. Maybe =ExerciseSet=?
+
 * [2024-01-28 Sun]
 
 - Switched off of flutter earlier, now on React/Redux to focus on web view
