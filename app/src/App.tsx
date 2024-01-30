@@ -1,12 +1,15 @@
 import React from 'react';
 import Routine from 'components/Routine/Routine';
-import './App.css';
+import { Container } from '@mui/material';
+import 'App.css';
 
 function App() {
   return (
-    <div className="App">
+    <Container
+      maxWidth="sm"
+    >
       <Routine />
-    </div>
+    </Container>
   );
 }
 
