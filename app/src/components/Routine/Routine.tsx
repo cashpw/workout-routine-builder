@@ -27,7 +27,6 @@ export default function Routine() {
   const { t } = useTranslation();
   const [addExerciseDialogOpen, setAddExerciseDialogOpen] = useState(false);
   const exerciseSets = useAppSelector(selectExerciseSets);
-  const name = useAppSelector(selectName);
   const dispatch = useAppDispatch();
 
   return (
@@ -35,7 +34,7 @@ export default function Routine() {
       variant="outlined"
     >
       <CardHeader
-        title={`Name: ${name}`}
+        title={t('routineTitle')}
       />
       {exerciseSets.length > 0 && (
         <CardContent>
