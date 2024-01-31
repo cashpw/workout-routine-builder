@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import {
   IconButton,
   TextField,
@@ -19,6 +20,7 @@ export default function CountInput(props: CountInputProps) {
     onIncrement,
     onDecrement,
   } = props;
+  const { t } = useTranslation();
 
   const inputWidth: number = (() => {
     const baseWidth = 3;
@@ -35,7 +37,7 @@ export default function CountInput(props: CountInputProps) {
         <MinusSquareIcon />
       </IconButton>
       <TextField
-        label="Count"
+        label={t('countLabel')}
         value={value}
         size="small"
         sx={{

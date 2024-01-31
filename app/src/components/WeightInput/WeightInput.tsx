@@ -55,7 +55,7 @@ export default function WeightInput(props: WeightInputProps) {
       </IconButton>
       <TextField
         variant="outlined"
-        label="Weight"
+        label={t('weightLabel')}
         value={value}
         size="small"
         InputProps={{
