@@ -21,6 +21,7 @@ import routineReducer, {
   setRepetitionWeight,
   removeExerciseSet,
   selectExerciseSets,
+  selectName,
 } from './routineSlice';
 
 describe('routine reducer', () => {
@@ -65,6 +66,19 @@ describe('routine reducer', () => {
           { exerciseId: barbellHipThrust.id, repetitions: [] },
           { exerciseId: barbellBenchPress.id, repetitions: [] },
         ]);
+      });
+    });
+
+    describe('selectName', () => {
+      it('should return name', () => {
+        const rootState = {
+          routine: {
+            ...initialState,
+            name: 'foo',
+          },
+        };
+
+        expect(selectName(rootState)).toEqual('foo');
       });
     });
   });
