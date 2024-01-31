@@ -14,13 +14,11 @@ import { RootState } from 'app/store';
 import exercisesById from 'exercises/byId';
 
 export interface RoutineState {
-  name: string;
   exerciseSets: ExerciseSet[];
 }
 
 const exerciseIds = Object.keys(exercisesById).map(id => +id);
 const initialState: RoutineState = {
-  name: "",
   exerciseSets: [],
 };
 
@@ -161,7 +159,6 @@ export const routineSlice = createSlice({
 });
 
 export const selectExerciseSets = (state: RootState) => state.routine.exerciseSets;
-export const selectName = (state: RootState) => state.routine.name;
 export const selectExerciseSet = (index: number) => (state: RootState) => {
   if (!isValidIndex(index, state.routine.exerciseSets)) {
     return undefined;

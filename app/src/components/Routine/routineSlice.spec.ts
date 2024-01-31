@@ -24,13 +24,11 @@ import routineReducer, {
   selectExerciseSets,
   selectExerciseSet,
   selectRepetition,
-  selectName,
 } from './routineSlice';
 
 describe('routine reducer', () => {
   const initialState: RoutineState = {
     exerciseSets: [],
-    name: "",
   };
 
   function addExerciseSets(initialState: RoutineState, ids: ExerciseId[]): RoutineState {
@@ -46,7 +44,6 @@ describe('routine reducer', () => {
   it('should handle initial state', () => {
     expect(routineReducer(undefined, { type: 'unknown' })).toEqual({
       exerciseSets: [],
-      name: "",
     });
   });
 
@@ -184,19 +181,6 @@ describe('routine reducer', () => {
           { exerciseId: barbellHipThrust.id, repetitions: [] },
           { exerciseId: barbellBenchPress.id, repetitions: [] },
         ]);
-      });
-    });
-
-    describe('selectName', () => {
-      it('should return name', () => {
-        const rootState = {
-          routine: {
-            ...initialState,
-            name: 'foo',
-          },
-        };
-
-        expect(selectName(rootState)).toEqual('foo');
       });
     });
   });

@@ -16,7 +16,6 @@ import {
 import {
   addExerciseSet,
   selectExerciseSets,
-  selectName,
 } from './routineSlice';
 // import styles from './Routine.module.css';
 import exercisesAsList from 'exercises/asList';
