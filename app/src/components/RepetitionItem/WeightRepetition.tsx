@@ -86,6 +86,16 @@ export default function WeightRepetition(props: WeightRepetitionProps) {
        container
        item
      >
+      <Grid
+         item
+         xs={5}
+       >
+         <CountInput
+           count={count}
+           onIncrement={handleIncrementCount}
+           onDecrement={handleDecrementCount}
+         />
+       </Grid>
        <Grid
          item
          xs={5}
@@ -95,16 +105,6 @@ export default function WeightRepetition(props: WeightRepetitionProps) {
            unit={unit}
            onIncrement={handleIncrementWeight}
            onDecrement={handleDecrementWeight}
-         />
-       </Grid>
-       <Grid
-         item
-         xs={5}
-       >
-         <CountInput
-           count={count}
-           onIncrement={handleIncrementCount}
-           onDecrement={handleDecrementCount}
          />
        </Grid>
        <Grid
