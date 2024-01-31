@@ -6,22 +6,37 @@ import {
   configureStore,
 } from '@reduxjs/toolkit';
 import history from 'history/browser';
-import qs from 'qs';
 
 import routineReducer, {
   addExerciseSet,
+  addCountRepetition,
+  addWeightRepetition,
   removeExerciseSet,
+  removeRepetition,
+  setRepetitionCount,
+  setRepetitionWeight,
 } from 'components/Routine/routineSlice';
 
-/*
 function getStateFromQueryParameters() {
-  return qs.parse(history.location.search);
+  if (history.location.search && history.location.search.startsWith("?")) {
+    const encodedQueryString = history.location.search.slice(1);
+    console.log(encodedQueryString);
+    return JSON.parse(decodeURIComponent(encodedQueryString));
+  }
+
+  return {}
 }
-*/
 
 const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
-  matcher: isAnyOf(addExerciseSet, removeExerciseSet),
+  matcher: isAnyOf(
+    addExerciseSet,
+    addCountRepetition,
+    addWeightRepetition,
+    removeExerciseSet,
+    removeRepetition,
+    setRepetitionCount,
+    setRepetitionWeight),
   effect: async (_, listenerApi) => {
     storeStateInQueryParameters(listenerApi.getState() as {});
   },
@@ -31,7 +46,7 @@ export const store = configureStore({
   reducer: {
     routine: routineReducer,
   },
-  // preloadedState: getStateFromQueryParameters(),
+  preloadedState: getStateFromQueryParameters(),
   middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 });
 
@@ -46,6 +61,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 function storeStateInQueryParameters(state: {}) {
-  const queryString = qs.stringify(state);
+  const queryString = encodeURIComponent(JSON.stringify(state));
+  // qs.stringify(state, {});
   history.replace(`/?${queryString}`);
 }
