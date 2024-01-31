@@ -87,7 +87,7 @@ export default function WeightRepetition(props: WeightRepetitionProps) {
       <Grid
         item
       >
-        delete
+        -delete
       </Grid>
     </Grid>
   );

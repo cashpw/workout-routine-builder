@@ -25,9 +25,7 @@ export default function RepetitionList(props: RepetitionListProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <Grid
-      container
-    >
+    <>
       {repetitions.map((repetition, index) => (
         <RepetitionItem
           key={index}
@@ -52,6 +50,6 @@ export default function RepetitionList(props: RepetitionListProps) {
           Add weight repetition
         </Button>
       </Grid>
-    </Grid>
+    </>
   );
 }
