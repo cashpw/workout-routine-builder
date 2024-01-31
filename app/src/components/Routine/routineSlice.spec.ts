@@ -285,7 +285,7 @@ describe('routine reducer', () => {
   });
 
   describe('setRepetitionCount', () => {
-    it('should set the count', () => {
+    it('should set the count for a count repetition', () => {
       let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
       state = routineReducer(state, addCountRepetition(0));
       state = routineReducer(state, setRepetitionCount({
@@ -300,6 +300,30 @@ describe('routine reducer', () => {
           repetitions: [
             {
               type: RepetitionType.COUNT,
+              count: 5,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should set the count for a weight repetition', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addWeightRepetition(0));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        count: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.WEIGHT,
+              unit: WeightUnit.POUNDS,
+              weight: 0,
               count: 5,
             },
           ],
