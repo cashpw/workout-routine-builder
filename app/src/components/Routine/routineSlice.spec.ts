@@ -17,6 +17,7 @@ import routineReducer, {
   addExerciseSet,
   addCountRepetition,
   addWeightRepetition,
+  setRepetitionCount,
   removeExerciseSet,
 } from './routineSlice';
 
@@ -283,4 +284,142 @@ describe('routine reducer', () => {
     });
   });
 
+  describe('setRepetitionCount', () => {
+    it('should set the count', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        count: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 5,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should not set the count when new count is <0', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        count: 5
+      }));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        count: -1,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 5,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should not set the count when exerciseSetIndex is <0', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: -1,
+        repetitionIndex: 0,
+        count: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should not set the count when exerciseSetIndex is >max', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: 1,
+        repetitionIndex: 0,
+        count: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should not set the count when repetitionIndex is <0', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: 0,
+        repetitionIndex: -1,
+        count: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should not set the count when repetitionIndex is >max', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+      state = routineReducer(state, setRepetitionCount({
+        exerciseSetIndex: 0,
+        repetitionIndex: 1,
+        count: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+  });
 });

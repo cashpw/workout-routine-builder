@@ -27,6 +27,12 @@ function isValidIndex(index: number, arr: Array<any>) {
   return index >= 0 && index < arr.length;
 }
 
+export interface SetRepetitionCountAction {
+  exerciseSetIndex: number;
+  repetitionIndex: number;
+  count: number;
+}
+
 export const routineSlice = createSlice({
   name: 'routine',
   initialState,
@@ -78,6 +84,28 @@ export const routineSlice = createSlice({
         count: 0,
       })
     },
+    setRepetitionCount: (state, action: PayloadAction<SetRepetitionCountAction>) => {
+      const {
+        exerciseSetIndex,
+        repetitionIndex,
+        count,
+      } = action.payload;
+      if (count < 0) {
+        return;
+      }
+
+      if (!isValidIndex(exerciseSetIndex, state.exerciseSets) || !isValidIndex(repetitionIndex, state.exerciseSets[exerciseSetIndex].repetitions)) {
+        // TODO: Handle error
+        return;
+      }
+
+      if (!('count' in state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex])) {
+        // TODO: Handle error
+        return;
+      }
+
+      state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex].count = count;
+    },
   },
 });
 
@@ -88,5 +116,6 @@ export const {
   addCountRepetition,
   addWeightRepetition,
   removeExerciseSet,
+  setRepetitionCount,
 } = routineSlice.actions;
 export default routineSlice.reducer;
