@@ -8,7 +8,10 @@ import {
   useAppDispatch,
 } from 'app/hooks';
 
-import { addWeightRepetition } from 'components/Routine/routineSlice';
+import {
+  addCountRepetition,
+  addWeightRepetition,
+} from 'components/Routine/routineSlice';
 import RepetitionItem from 'components/RepetitionItem/RepetitionItem';
 
 export interface RepetitionListProps {
@@ -31,6 +34,12 @@ export default function RepetitionList(props: RepetitionListProps) {
           repetition={repetition}
         />
       ))}
+      <Button
+        variant="outlined"
+        onClick={() => dispatch(addCountRepetition(exerciseSetIndex))}
+      >
+        Add count repetition
+      </Button>
       <Button
         variant="outlined"
         onClick={() => dispatch(addWeightRepetition(exerciseSetIndex))}
