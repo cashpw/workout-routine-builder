@@ -9,6 +9,7 @@ import {
   IndeterminateCheckBox as MinusSquareIcon,
 } from '@mui/icons-material';
 
+import { getWeightAbbreviationLabel } from 'utils';
 import { WeightUnit } from 'types.d';
 
 export interface WeightInputProps {
@@ -27,21 +28,11 @@ export default function WeightInput(props: WeightInputProps) {
   } = props;
   const { t } = useTranslation();
 
-  const translatedWeightUnitAbbreviation: string = (() => {
-    switch (unit) {
-      case WeightUnit.KILOGRAMS:
-        return t('kilogramsAbbreviation');
-      case WeightUnit.POUNDS:
-        return t('poundsAbbreviation');
-    }
-
-    // TODO Handle error case
-    return ""
-  })();
+  const unitAbbreviation = t(getWeightAbbreviationLabel(unit));
   const inputWidth: number = (() => {
     const baseWidth = 3;
     const digitWidth = 4;
-    const endAdornmentWidth = translatedWeightUnitAbbreviation.length;
+    const endAdornmentWidth = unitAbbreviation.length;
 
     return baseWidth + digitWidth + endAdornmentWidth;
   })();
@@ -59,7 +50,7 @@ export default function WeightInput(props: WeightInputProps) {
         value={weight}
         size="small"
         InputProps={{
-          endAdornment: <InputAdornment position="end">{translatedWeightUnitAbbreviation}</InputAdornment>
+          endAdornment: <InputAdornment position="end">{unitAbbreviation}</InputAdornment>
         }}
         sx={{
           width: `${inputWidth}ch`,
