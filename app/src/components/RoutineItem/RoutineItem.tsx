@@ -8,6 +8,7 @@ import {
 import { DeleteOutline as DeleteOutlineIcon } from '@mui/icons-material';
 
 import RepetitionList from 'components/RepetitionList/RepetitionList';
+import ExerciseSetSummary from 'components/ExerciseSetSummary/ExerciseSetSummary';
 import exercisesById from 'exercises/byId';
 
 export interface RoutineItemProps {
@@ -42,6 +43,9 @@ export default function RoutineItem(props: RoutineItemProps) {
           xs={10}
         >
           {exerciseName}
+          <ExerciseSetSummary
+            exerciseSet={exerciseSet}
+          />
         </Grid>
         <Grid
           item
