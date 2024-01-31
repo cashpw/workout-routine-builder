@@ -21,6 +21,7 @@ export default function RoutineItems(props: RoutineItemsProps) {
       {exerciseSets.map((exerciseSet, index) => (
         <RoutineItem
           key={index.toString()}
+          exerciseSetIndex={index}
           exerciseSet={exerciseSet}
           handleRemoveExercise={() => dispatch(removeExerciseSet(index))}
         />

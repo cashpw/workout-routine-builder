@@ -11,6 +11,7 @@ import exercisesById from 'exercises/byId';
 
 export interface RoutineItemProps {
   exerciseSet: ExerciseSet;
+  exerciseSetIndex: number;
   handleRemoveExercise: () => void;
 }
 
@@ -18,6 +19,7 @@ export default function RoutineItem(props: RoutineItemProps) {
   const {
     handleRemoveExercise,
     exerciseSet,
+    exerciseSetIndex,
   } = props;
   const {
     exerciseId,
@@ -37,6 +39,7 @@ export default function RoutineItem(props: RoutineItemProps) {
         Delete exercise
       </Button>
       <RepetitionList
+        exerciseSetIndex={exerciseSetIndex}
         repetitions={repetitions}
       />
     </Stack>
