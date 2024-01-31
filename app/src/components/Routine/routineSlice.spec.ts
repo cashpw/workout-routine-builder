@@ -18,6 +18,7 @@ import routineReducer, {
   addCountRepetition,
   addWeightRepetition,
   setRepetitionCount,
+  setRepetitionWeight,
   removeExerciseSet,
 } from './routineSlice';
 
@@ -444,6 +445,119 @@ describe('routine reducer', () => {
           ],
         },
       ]);
+    });
+  });
+
+  describe('setRepetitionWeight', () => {
+    it('should set the weight for a weight repetition', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addWeightRepetition(0));
+      state = routineReducer(state, setRepetitionWeight({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        weight: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.WEIGHT,
+              unit: WeightUnit.POUNDS,
+              weight: 5,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should not set the weight for a count repetition', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addCountRepetition(0));
+      state = routineReducer(state, setRepetitionWeight({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        weight: 5,
+      }));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.COUNT,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+
+    it('should not set the weight when new weight is <0', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addWeightRepetition(0));
+      const expectedState = routineReducer(state, setRepetitionWeight({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        weight: 5
+      }));
+      const actualState = routineReducer(expectedState, setRepetitionWeight({
+        exerciseSetIndex: 0,
+        repetitionIndex: 0,
+        weight: -1,
+      }));
+
+      expect(expectedState).toEqual(actualState);
+    });
+
+    it('should not set the weight when exerciseSetIndex is <0', () => {
+      const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      const expectedState = routineReducer(state, addWeightRepetition(0));
+      const actualState = routineReducer(expectedState, setRepetitionWeight({
+        exerciseSetIndex: -1,
+        repetitionIndex: 0,
+        weight: 5,
+      }));
+
+      expect(expectedState).toEqual(actualState);
+    });
+
+    it('should not set the weight when exerciseSetIndex is >max', () => {
+      const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      const expectedState = routineReducer(state, addWeightRepetition(0));
+      const actualState = routineReducer(expectedState, setRepetitionWeight({
+        exerciseSetIndex: 1,
+        repetitionIndex: 0,
+        weight: 5,
+      }));
+
+      expect(expectedState).toEqual(actualState);
+    });
+
+    it('should not set the weight when repetitionIndex is <0', () => {
+      const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      const expectedState = routineReducer(state, addWeightRepetition(0));
+      const actualState = routineReducer(expectedState, setRepetitionWeight({
+        exerciseSetIndex: 0,
+        repetitionIndex: -1,
+        weight: 5,
+      }));
+
+      expect(expectedState).toEqual(actualState);
+    });
+
+    it('should not set the weight when repetitionIndex is >max', () => {
+      const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      const expectedState = routineReducer(state, addWeightRepetition(0));
+      const actualState = routineReducer(expectedState, setRepetitionWeight({
+        exerciseSetIndex: 0,
+        repetitionIndex: 1,
+        weight: 5,
+      }));
+
+      expect(expectedState).toEqual(actualState);
     });
   });
 });

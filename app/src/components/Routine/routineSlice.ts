@@ -33,6 +33,12 @@ export interface SetRepetitionCountAction {
   count: number;
 }
 
+export interface SetRepetitionWeightAction {
+  exerciseSetIndex: number;
+  repetitionIndex: number;
+  weight: number;
+}
+
 export const routineSlice = createSlice({
   name: 'routine',
   initialState,
@@ -106,6 +112,30 @@ export const routineSlice = createSlice({
 
       state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex].count = count;
     },
+    setRepetitionWeight: (state, action: PayloadAction<SetRepetitionWeightAction>) => {
+      const {
+        exerciseSetIndex,
+        repetitionIndex,
+        weight,
+      } = action.payload;
+      if (weight < 0) {
+        return;
+      }
+
+      if (!isValidIndex(exerciseSetIndex, state.exerciseSets) || !isValidIndex(repetitionIndex, state.exerciseSets[exerciseSetIndex].repetitions)) {
+        // TODO: Handle error
+        return;
+      }
+
+      if (!('weight' in state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex])) {
+        // TODO: Handle error
+        return;
+      }
+
+      state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex].weight = weight;
+    },
+
+
   },
 });
 
@@ -117,5 +147,6 @@ export const {
   addWeightRepetition,
   removeExerciseSet,
   setRepetitionCount,
+  setRepetitionWeight,
 } = routineSlice.actions;
 export default routineSlice.reducer;
