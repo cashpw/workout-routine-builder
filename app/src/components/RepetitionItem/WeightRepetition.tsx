@@ -1,15 +1,15 @@
 import type { WeightRepetition as WeightRepetitionType } from 'types';
-import { useTranslation } from 'react-i18next';
-import { WeightUnit } from 'types.d';
 
-import { Stack } from '@mui/material';
+import { Grid } from '@mui/material';
+
+import CountInput from 'components/CountInput/CountInput';
+import WeightInput from 'components/WeightInput/WeightInput';
 
 export interface WeightRepetitionProps {
   repetition: WeightRepetitionType;
 }
 
 export default function WeightRepetition(props: WeightRepetitionProps) {
-  const { t } = useTranslation();
   const {
     repetition,
   } = props;
@@ -19,24 +19,46 @@ export default function WeightRepetition(props: WeightRepetitionProps) {
     unit: weightUnit,
   } = repetition;
 
-  const weightUnitAbbreviation: string = (() => {
-    switch (weightUnit) {
-      case WeightUnit.KILOGRAMS:
-        return t('kilogramsAbbreviation');
-      case WeightUnit.POUNDS:
-        return t('poundsAbbreviation');
-    }
+  function handleIncrementWeight() {
+  }
+  function handleDecrementWeight() {
+  }
 
-    // TODO Handle error case
-    return ""
-  })();
-
+  function handleIncrementCount() {
+  }
+  function handleDecrementCount() {
+  }
   return (
-    <Stack
-      direction="row"
+    <Grid
+      container
+      item
     >
-      <span>Weight: {weight} {weightUnitAbbreviation}</span>
-      <span>Count: {count}</span>
-    </Stack>
+      <Grid
+        item
+        xs={5}
+      >
+        <WeightInput
+          value={weight}
+          onIncrement={handleIncrementWeight}
+          onDecrement={handleDecrementWeight}
+          weightUnit={weightUnit}
+        />
+      </Grid>
+      <Grid
+        item
+        xs={5}
+      >
+        <CountInput
+          value={count}
+          onIncrement={handleIncrementCount}
+          onDecrement={handleDecrementCount}
+        />
+      </Grid>
+      <Grid
+        item
+      >
+        delete
+      </Grid>
+    </Grid>
   );
 }

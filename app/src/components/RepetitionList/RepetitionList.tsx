@@ -2,7 +2,7 @@ import type { Repetition as RepetitionType } from 'types';
 
 import {
   Button,
-  Stack,
+  Grid,
 } from '@mui/material';
 import {
   useAppDispatch,
@@ -27,25 +27,32 @@ export default function RepetitionList(props: RepetitionListProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <Stack>
+    <Grid
+      container
+    >
       {repetitions.map((repetition, index) => (
         <RepetitionItem
           key={index}
           repetition={repetition}
         />
       ))}
-      <Button
-        variant="outlined"
-        onClick={() => dispatch(addCountRepetition(exerciseSetIndex))}
+      <Grid
+        item
+        xs={12}
       >
-        Add count repetition
-      </Button>
-      <Button
-        variant="outlined"
-        onClick={() => dispatch(addWeightRepetition(exerciseSetIndex))}
-      >
-        Add weight repetition
-      </Button>
-    </Stack>
+        <Button
+          variant="outlined"
+          onClick={() => dispatch(addCountRepetition(exerciseSetIndex))}
+        >
+          Add count repetition
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => dispatch(addWeightRepetition(exerciseSetIndex))}
+        >
+          Add weight repetition
+        </Button>
+      </Grid>
+    </Grid>
   );
 }

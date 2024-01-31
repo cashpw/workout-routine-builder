@@ -1,4 +1,8 @@
 {
+  "weightLabel": "Weight",
+  "countLabel": "count",
+  "pounds": "Pounds",
+  "kilograms": "Kilograms",
   "poundsAbbreviation": "lbs",
   "kilogramsAbbreviation": "lbs",
   "addExerciseCallToAction": "Add exercise",
@@ -6,5 +10,4 @@
   "barbellcurl": "Barbell curl",
   "barbellbenchpress": "Barbell bench press",
   "barbellhipthrust": "Barbell hip thrust"
-
 }

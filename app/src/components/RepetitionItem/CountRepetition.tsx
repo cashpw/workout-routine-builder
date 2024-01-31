@@ -1,6 +1,8 @@
 import type { CountRepetition as CountRepetitionType } from 'types';
 
-import { Stack } from '@mui/material';
+import { Grid } from '@mui/material';
+
+import CountInput from 'components/CountInput/CountInput';
 
 export interface CountRepetitionProps {
   repetition: CountRepetitionType;
@@ -14,11 +16,31 @@ export default function CountRepetition(props: CountRepetitionProps) {
     count,
   } = repetition;
 
+  function handleIncrementCount() {
+  }
+  function handleDecrementCount() {
+  }
+
   return (
-    <Stack
-      direction="row"
+    <Grid
+      container
+      item
     >
-      <span>Count: {count}</span>
-    </Stack>
+      <Grid
+        item
+        xs={10}
+      >
+        <CountInput
+          value={count}
+          onIncrement={handleIncrementCount}
+          onDecrement={handleDecrementCount}
+        />
+      </Grid>
+      <Grid
+        item
+      >
+        delete
+      </Grid>
+    </Grid>
   );
 }
