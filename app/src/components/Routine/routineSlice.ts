@@ -23,6 +23,10 @@ const initialState: RoutineState = {
   exerciseSets: [],
 };
 
+function isValidIndex(index: number, arr: Array<any>) {
+  return index >= 0 && index < arr.length;
+}
+
 export const routineSlice = createSlice({
   name: 'routine',
   initialState,
@@ -41,7 +45,7 @@ export const routineSlice = createSlice({
     },
     removeExerciseSet: (state, action: PayloadAction<number>) => {
       const exerciseSetsIndex = action.payload;
-      if (exerciseSetsIndex < 0 || exerciseSetsIndex >= state.exerciseSets.length) {
+      if (!isValidIndex(exerciseSetsIndex, state.exerciseSets)) {
         // TODO: Handle error
         return;
       }
@@ -50,7 +54,7 @@ export const routineSlice = createSlice({
     },
     addCountRepetition: (state, action: PayloadAction<number>) => {
       const exerciseSetsIndex = action.payload;
-      if (exerciseSetsIndex < 0 || exerciseSetsIndex >= state.exerciseSets.length) {
+      if (!isValidIndex(exerciseSetsIndex, state.exerciseSets)) {
         // TODO: Handle error
         return;
       }
@@ -62,7 +66,7 @@ export const routineSlice = createSlice({
     },
     addWeightRepetition: (state, action: PayloadAction<number>) => {
       const exerciseSetsIndex = action.payload;
-      if (exerciseSetsIndex < 0 || exerciseSetsIndex >= state.exerciseSets.length) {
+      if (!isValidIndex(exerciseSetsIndex, state.exerciseSets)) {
         // TODO: Handle error
         return;
       }
