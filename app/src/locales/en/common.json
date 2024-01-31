@@ -1,4 +1,6 @@
 {
+  "poundsAbbreviation": "lbs",
+  "kilogramsAbbreviation": "lbs",
   "addExerciseCallToAction": "Add exercise",
   "addExerciseDialogTitle": "Add Exercise",
   "barbellcurl": "Barbell curl",
