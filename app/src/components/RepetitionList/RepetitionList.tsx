@@ -3,6 +3,7 @@ import type { Repetition as RepetitionType } from 'types';
 import {
   Button,
   Grid,
+  List,
 } from '@mui/material';
 import { useAppDispatch } from 'app/hooks';
 
@@ -26,13 +27,20 @@ export default function RepetitionList(props: RepetitionListProps) {
 
   return (
     <>
-      {repetitions.map((repetition, index) => (
-        <RepetitionItem
-          key={index}
-          exerciseSetIndex={exerciseSetIndex}
-          repetitionIndex={index}
-        />
-      ))}
+      <Grid
+        item
+        xs={12}
+      >
+        <List>
+          {repetitions.map((repetition, index) => (
+            <RepetitionItem
+              key={index}
+              exerciseSetIndex={exerciseSetIndex}
+              repetitionIndex={index}
+            />
+          ))}
+        </List>
+      </Grid>
       <Grid
         item
         xs={12}

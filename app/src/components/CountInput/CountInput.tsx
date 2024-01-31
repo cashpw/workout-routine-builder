@@ -9,16 +9,16 @@ import {
 } from '@mui/icons-material';
 
 export interface CountInputProps {
-  value: number;
+  count: number;
   onIncrement: () => void;
   onDecrement: () => void;
 }
 
 export default function CountInput(props: CountInputProps) {
   const {
-    value,
-    onIncrement,
+    count,
     onDecrement,
+    onIncrement,
   } = props;
   const { t } = useTranslation();
 
@@ -38,7 +38,7 @@ export default function CountInput(props: CountInputProps) {
       </IconButton>
       <TextField
         label={t('countLabel')}
-        value={value}
+        value={count}
         size="small"
         sx={{
           width: `${inputWidth}ch`,

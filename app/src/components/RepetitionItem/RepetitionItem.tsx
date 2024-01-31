@@ -4,13 +4,8 @@ import type {
   WeightRepetition as WeightRepetitionType,
 } from 'types';
 
-
-import {
-  useAppSelector,
-} from 'app/hooks';
-import {
-  selectRepetition,
-} from 'components/Routine/routineSlice';
+import { useAppSelector } from 'app/hooks';
+import { selectRepetition } from 'components/Routine/routineSlice';
 import { RepetitionType } from 'types.d';
 
 import WeightRepetition from './WeightRepetition';
@@ -26,22 +21,27 @@ export default function RepetitionItem(props: RepetitionItemProps) {
     exerciseSetIndex,
     repetitionIndex,
   } = props;
-  const repetition = useAppSelector(selectRepetition(exerciseSetIndex, repetitionIndex));
-  if (!repetition) {
-    return (<></>);
+  const optionalRepetition = useAppSelector(selectRepetition(exerciseSetIndex, repetitionIndex));
+  if (!optionalRepetition) {
+    return (<></>)
   }
+  const repetition = optionalRepetition as Repetition;
 
   switch ((repetition as Repetition).type) {
     case RepetitionType.WEIGHT:
-      return (
+     return (
         <WeightRepetition
+          exerciseSetIndex={exerciseSetIndex}
           repetition={repetition as WeightRepetitionType}
+          repetitionIndex={repetitionIndex}
         />
       );
     case RepetitionType.COUNT:
       return (
         <CountRepetition
+          exerciseSetIndex={exerciseSetIndex}
           repetition={repetition as CountRepetitionType}
+          repetitionIndex={repetitionIndex}
         />
       );
   }

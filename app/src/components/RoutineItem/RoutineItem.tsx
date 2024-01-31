@@ -3,8 +3,9 @@ import type { ExerciseSet } from 'types';
 import { useTranslation } from 'react-i18next';
 import {
   Grid,
-  Button,
+  IconButton,
 } from '@mui/material';
+import { DeleteOutline as DeleteOutlineIcon } from '@mui/icons-material';
 
 import RepetitionList from 'components/RepetitionList/RepetitionList';
 import exercisesById from 'exercises/byId';
@@ -46,13 +47,12 @@ export default function RoutineItem(props: RoutineItemProps) {
           item
           xs={2}
         >
-          <Button
-            variant="outlined"
+          <IconButton
             aria-label="delete"
             onClick={handleRemoveExercise}
           >
-            -exercise
-          </Button>
+            <DeleteOutlineIcon />
+          </IconButton>
         </Grid>
       </Grid>
       <Grid

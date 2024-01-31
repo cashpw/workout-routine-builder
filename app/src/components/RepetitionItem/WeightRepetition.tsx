@@ -1,94 +1,122 @@
 import type { WeightRepetition as WeightRepetitionType } from 'types';
 
-import { Grid } from '@mui/material';
+import {
+  IconButton,
+  Grid,
+  ListItem,
+} from '@mui/material';
+import { DeleteOutline as DeleteOutlineIcon } from '@mui/icons-material';
 
 import { useAppDispatch } from 'app/hooks';
+import {
+  removeRepetition,
+  setRepetitionWeight,
+  setRepetitionCount,
+} from 'components/Routine/routineSlice';
 import CountInput from 'components/CountInput/CountInput';
 import WeightInput from 'components/WeightInput/WeightInput';
-import {
-  setRepetitionCount,
-  setRepetitionWeight,
-} from 'components/Routine/routineSlice';
 
 export interface WeightRepetitionProps {
+  exerciseSetIndex: number;
   repetition: WeightRepetitionType;
+  repetitionIndex: number;
 }
 
 export default function WeightRepetition(props: WeightRepetitionProps) {
   const {
+    exerciseSetIndex,
     repetition,
+    repetitionIndex,
   } = props;
   const {
-    weight,
     count,
-    unit: weightUnit,
+    unit,
+    weight,
   } = repetition;
   const dispatch = useAppDispatch();
   const weightStep = 5;
   const countStep = 1;
 
-   function handleIncrementWeight() {
+  function handleIncrementWeight() {
     dispatch(setRepetitionWeight({
-      exerciseSetIndex: 0,
-      repetitionIndex: 0,
+      exerciseSetIndex,
+      repetitionIndex,
       weight: weight + weightStep,
     }));
   }
   function handleDecrementWeight() {
     const decrementedWeight = weight - weightStep;
     dispatch(setRepetitionWeight({
-      exerciseSetIndex: 0,
-      repetitionIndex: 0,
+      exerciseSetIndex,
+      repetitionIndex,
       weight: (decrementedWeight < 0) ? 0 : decrementedWeight,
     }));
   }
-
- function handleIncrementCount() {
+  function handleIncrementCount() {
     dispatch(setRepetitionCount({
-      exerciseSetIndex: 0,
-      repetitionIndex: 0,
+      exerciseSetIndex,
+      repetitionIndex,
       count: count + countStep,
     }));
   }
   function handleDecrementCount() {
     const decrementedCount = count - countStep;
     dispatch(setRepetitionCount({
-      exerciseSetIndex: 0,
-      repetitionIndex: 0,
+      exerciseSetIndex,
+      repetitionIndex,
       count: (decrementedCount < 0) ? 0 : decrementedCount,
     }));
   }
-  return (
-    <Grid
-      container
-      item
-    >
-      <Grid
-        item
-        xs={5}
-      >
-        <WeightInput
-          value={weight}
-          onIncrement={handleIncrementWeight}
-          onDecrement={handleDecrementWeight}
-          weightUnit={weightUnit}
-        />
-      </Grid>
-      <Grid
-        item
-        xs={5}
-      >
-        <CountInput
-          value={count}
-          onIncrement={handleIncrementCount}
-          onDecrement={handleDecrementCount}
-        />
-      </Grid>
-      <Grid
-        item
-      >
-        -delete
-      </Grid>
-    </Grid>
+  function handleRemoveRepetition() {
+    dispatch(removeRepetition({
+      exerciseSetIndex,
+      repetitionIndex,
+    }));
+  }
+
+ return (
+   <ListItem
+     divider
+      sx={{
+        paddingTop: 2,
+        paddingBottom: 2,
+      }}
+   >
+     <Grid
+       container
+       item
+     >
+       <Grid
+         item
+         xs={5}
+       >
+         <WeightInput
+           weight={weight}
+           unit={unit}
+           onIncrement={handleIncrementWeight}
+           onDecrement={handleDecrementWeight}
+         />
+       </Grid>
+       <Grid
+         item
+         xs={5}
+       >
+         <CountInput
+           count={count}
+           onIncrement={handleIncrementCount}
+           onDecrement={handleDecrementCount}
+         />
+       </Grid>
+       <Grid
+         item
+       >
+         <IconButton
+           onClick={handleRemoveRepetition}
+         >
+            <DeleteOutlineIcon />
+         </IconButton>
+       </Grid>
+     </Grid>
+    </ListItem>
   );
 }

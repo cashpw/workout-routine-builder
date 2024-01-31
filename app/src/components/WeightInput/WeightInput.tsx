@@ -12,23 +12,23 @@ import {
 import { WeightUnit } from 'types.d';
 
 export interface WeightInputProps {
-  value: number;
+  weight: number;
   onIncrement: () => void;
   onDecrement: () => void;
-  weightUnit: WeightUnit;
+  unit: WeightUnit;
 }
 
 export default function WeightInput(props: WeightInputProps) {
   const {
-    value,
+    weight,
     onIncrement,
     onDecrement,
-    weightUnit,
+    unit,
   } = props;
   const { t } = useTranslation();
 
   const translatedWeightUnitAbbreviation: string = (() => {
-    switch (weightUnit) {
+    switch (unit) {
       case WeightUnit.KILOGRAMS:
         return t('kilogramsAbbreviation');
       case WeightUnit.POUNDS:
@@ -56,7 +56,7 @@ export default function WeightInput(props: WeightInputProps) {
       <TextField
         variant="outlined"
         label={t('weightLabel')}
-        value={value}
+        value={weight}
         size="small"
         InputProps={{
           endAdornment: <InputAdornment position="end">{translatedWeightUnitAbbreviation}</InputAdornment>
