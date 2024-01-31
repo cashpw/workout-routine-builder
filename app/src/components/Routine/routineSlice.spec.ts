@@ -20,6 +20,7 @@ import routineReducer, {
   setRepetitionCount,
   setRepetitionWeight,
   removeExerciseSet,
+  removeRepetition,
   selectExerciseSets,
   selectExerciseSet,
   selectRepetition,
@@ -290,6 +291,64 @@ describe('routine reducer', () => {
         expect(state.exerciseSets).toEqual([
           { exerciseId: barbellBenchPress.id, repetitions: [] },
         ]);
+      });
+    });
+
+    describe('removeRepetition', () => {
+      it('should remove an exercise set', () => {
+        let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        state = routineReducer(state, addCountRepetition(0));
+        state = routineReducer(state, removeRepetition({
+          exerciseSetIndex: 0,
+          repetitionIndex: 0,
+        }));
+
+        expect(state.exerciseSets[0].repetitions).toStrictEqual([]);
+      });
+
+      it('should not remove an repetition set when exerciseSetIndex < 0', () => {
+        let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        state = routineReducer(state, addCountRepetition(0));
+        state = routineReducer(state, removeRepetition({
+          exerciseSetIndex: -1,
+          repetitionIndex: 0,
+        }));
+
+        expect(state.exerciseSets[0].repetitions.length).toEqual(1);
+      });
+
+      it('should not remove an repetition set when exerciseSetIndex > max', () => {
+        let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        state = routineReducer(state, addCountRepetition(0));
+        state = routineReducer(state, removeRepetition({
+          exerciseSetIndex: 1,
+          repetitionIndex: 0,
+        }));
+
+        expect(state.exerciseSets[0].repetitions.length).toEqual(1);
+      });
+
+      it('should not remove an repetition set when repetitionIndex < 0', () => {
+        let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        state = routineReducer(state, addCountRepetition(0));
+        state = routineReducer(state, removeRepetition({
+          exerciseSetIndex: 0,
+          repetitionIndex: -1,
+        }));
+
+        expect(state.exerciseSets[0].repetitions.length).toEqual(1);
+      });
+
+
+      it('should not remove an repetition set when repetitionIndex > max', () => {
+        let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        state = routineReducer(state, addCountRepetition(0));
+        state = routineReducer(state, removeRepetition({
+          exerciseSetIndex: 0,
+          repetitionIndex: 1,
+        }));
+
+        expect(state.exerciseSets[0].repetitions.length).toEqual(1);
       });
     });
 
