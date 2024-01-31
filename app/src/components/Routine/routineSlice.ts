@@ -1,6 +1,7 @@
 import type {
   ExerciseId,
   ExerciseSet,
+  WeightRepetition,
 } from 'types';
 
 import {
@@ -105,12 +106,16 @@ export const routineSlice = createSlice({
         return;
       }
 
-      if (!('count' in state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex])) {
+      const validRepetitionTypes = [
+        RepetitionType.COUNT,
+        RepetitionType.WEIGHT,
+      ];
+      if (!validRepetitionTypes.includes(state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex].type)) {
         // TODO: Handle error
         return;
       }
 
-      state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex].count = count;
+      (state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex] as {count: number}).count = count;
     },
     setRepetitionWeight: (state, action: PayloadAction<SetRepetitionWeightAction>) => {
       const {
@@ -127,15 +132,13 @@ export const routineSlice = createSlice({
         return;
       }
 
-      if (!('weight' in state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex])) {
+      if (state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex].type !== RepetitionType.WEIGHT) {
         // TODO: Handle error
         return;
       }
 
-      state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex].weight = weight;
+      (state.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex] as WeightRepetition).weight = weight;
     },
-
-
   },
 });
 
