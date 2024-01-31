@@ -22,6 +22,7 @@ import routineReducer, {
   removeExerciseSet,
   selectExerciseSets,
   selectExerciseSet,
+  selectRepetition,
   selectName,
 } from './routineSlice';
 
@@ -97,7 +98,71 @@ describe('routine reducer', () => {
 
         expect(selectExerciseSet(3)(rootState)).toBeUndefined();
       });
+    });
 
+    describe('selectRepetition', () => {
+      it('should return a repetition', () => {
+        let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        routineState = routineReducer(routineState, addCountRepetition(0));
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectRepetition(/*exerciseSetIndex=*/0, /*repetitionIndex=*/0)(rootState)).toEqual({
+          type: RepetitionType.COUNT,
+          count: 0,
+        });
+      });
+
+      it('should return undefined when exerciseSetIndex <0', () => {
+        let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        routineState = routineReducer(routineState, addCountRepetition(0));
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectRepetition(/*exerciseSetIndex=*/-1, /*repetitionIndex=*/0)(rootState)).toBeUndefined();
+      });
+
+      it('should return undefined when exerciseSetIndex >max', () => {
+        let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        routineState = routineReducer(routineState, addCountRepetition(0));
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectRepetition(/*exerciseSetIndex=*/1, /*repetitionIndex=*/0)(rootState)).toBeUndefined();
+      });
+
+     it('should return undefined when repetitionIndex <0', () => {
+        let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        routineState = routineReducer(routineState, addCountRepetition(0));
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectRepetition(/*exerciseSetIndex=*/0, /*repetitionIndex=*/-1)(rootState)).toBeUndefined();
+      });
+
+      it('should return undefined when repetitionIndex >max', () => {
+        let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        routineState = routineReducer(routineState, addCountRepetition(0));
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectRepetition(/*exerciseSetIndex=*/0, /*repetitionIndex=*/1)(rootState)).toBeUndefined();
+      });
     });
 
     describe('selectExerciseSets', () => {

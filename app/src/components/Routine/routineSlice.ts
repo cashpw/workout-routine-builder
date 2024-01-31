@@ -148,6 +148,13 @@ export const selectExerciseSet = (index: number) => (state: RootState) => {
 
   return state.routine.exerciseSets[index];
 };
+export const selectRepetition = (exerciseSetIndex: number, repetitionIndex: number) => (state: RootState) => {
+  if (!isValidIndex(exerciseSetIndex, state.routine.exerciseSets) || !isValidIndex(repetitionIndex, state.routine.exerciseSets[exerciseSetIndex].repetitions)) {
+    return undefined;
+  }
+
+  return state.routine.exerciseSets[exerciseSetIndex].repetitions[repetitionIndex];
+};
 export const {
   addExerciseSet,
   addCountRepetition,
