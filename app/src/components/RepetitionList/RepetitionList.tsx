@@ -1,7 +1,8 @@
 import type { Repetition as RepetitionType } from 'types';
 
 import {
-  List,
+  Button,
+  Stack,
 } from '@mui/material';
 
 import RepetitionItem from 'components/RepetitionItem/RepetitionItem';
@@ -16,13 +17,18 @@ export default function RepetitionList(props: RepetitionListProps) {
   } = props;
 
   return (
-    <List>
+    <Stack>
       {repetitions.map((repetition, index) => (
         <RepetitionItem
           key={index}
           repetition={repetition}
         />
       ))}
-    </List>
+      <Button
+        variant="outlined"
+      >
+        Add repetition
+      </Button>
+    </Stack>
   );
 }

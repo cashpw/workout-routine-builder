@@ -1,6 +1,6 @@
 import type { ExerciseSet } from 'types';
 
-import { List } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import { removeExerciseSet } from 'components/Routine/routineSlice';
 import RoutineItem from 'components/RoutineItem/RoutineItem';
@@ -17,7 +17,7 @@ export default function RoutineItems(props: RoutineItemsProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <List>
+    <Stack>
       {exerciseSets.map((exerciseSet, index) => (
         <RoutineItem
           key={index.toString()}
@@ -25,6 +25,6 @@ export default function RoutineItems(props: RoutineItemsProps) {
           handleRemoveExercise={() => dispatch(removeExerciseSet(index))}
         />
       ))}
-   </List>
+   </Stack>
   );
 }
