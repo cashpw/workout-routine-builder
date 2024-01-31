@@ -141,6 +141,13 @@ export const routineSlice = createSlice({
 
 export const selectExerciseSets = (state: RootState) => state.routine.exerciseSets;
 export const selectName = (state: RootState) => state.routine.name;
+export const selectExerciseSet = (index: number) => (state: RootState) => {
+  if (!isValidIndex(index, state.routine.exerciseSets)) {
+    return undefined;
+  }
+
+  return state.routine.exerciseSets[index];
+};
 export const {
   addExerciseSet,
   addCountRepetition,

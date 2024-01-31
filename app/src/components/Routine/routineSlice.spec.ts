@@ -21,6 +21,7 @@ import routineReducer, {
   setRepetitionWeight,
   removeExerciseSet,
   selectExerciseSets,
+  selectExerciseSet,
   selectName,
 } from './routineSlice';
 
@@ -48,6 +49,57 @@ describe('routine reducer', () => {
   });
 
   describe('selectors', () => {
+    describe('selectExerciseSet', () => {
+      it('should return exercise set', () => {
+        const routineState = addExerciseSets(initialState, [
+          barbellCurl.id,
+          barbellHipThrust.id,
+          barbellBenchPress.id,
+        ]);
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectExerciseSet(1)(rootState)).toEqual({
+          exerciseId: barbellHipThrust.id,
+          repetitions: [],
+        });
+      });
+
+      it('should return undefined when index <0', () => {
+        const routineState = addExerciseSets(initialState, [
+          barbellCurl.id,
+          barbellHipThrust.id,
+          barbellBenchPress.id,
+        ]);
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectExerciseSet(-1)(rootState)).toBeUndefined();
+      });
+
+     it('should return undefined when index >max', () => {
+        const routineState = addExerciseSets(initialState, [
+          barbellCurl.id,
+          barbellHipThrust.id,
+          barbellBenchPress.id,
+        ]);
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectExerciseSet(3)(rootState)).toBeUndefined();
+      });
+
+    });
+
     describe('selectExerciseSets', () => {
       it('should return all exercise sets', () => {
         const routineState = addExerciseSets(initialState, [
