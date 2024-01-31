@@ -17,6 +17,9 @@ export interface RoutineState {
   exerciseSets: ExerciseSet[];
 }
 
+export const MINIMUM_WEIGHT = 0;
+export const MINIMUM_COUNT = 1;
+
 const exerciseIds = Object.keys(exercisesById).map(id => +id);
 const initialState: RoutineState = {
   exerciseSets: [],
@@ -90,7 +93,7 @@ export const routineSlice = createSlice({
 
       state.exerciseSets[exerciseSetsIndex].repetitions.push({
         type: RepetitionType.COUNT,
-        count: 0,
+        count: MINIMUM_COUNT,
       })
     },
     addWeightRepetition: (state, action: PayloadAction<number>) => {
@@ -103,8 +106,8 @@ export const routineSlice = createSlice({
       state.exerciseSets[exerciseSetsIndex].repetitions.push({
         type: RepetitionType.WEIGHT,
         unit: WeightUnit.POUNDS,
-        weight: 0,
-        count: 0,
+        weight: MINIMUM_WEIGHT,
+        count: MINIMUM_COUNT,
       })
     },
     setRepetitionCount: (state, action: PayloadAction<SetRepetitionCountAction>) => {
@@ -113,7 +116,7 @@ export const routineSlice = createSlice({
         repetitionIndex,
         count,
       } = action.payload;
-      if (count < 0) {
+      if (count < MINIMUM_COUNT) {
         return;
       }
 
@@ -139,7 +142,7 @@ export const routineSlice = createSlice({
         repetitionIndex,
         weight,
       } = action.payload;
-      if (weight < 0) {
+      if (weight < MINIMUM_WEIGHT) {
         return;
       }
 

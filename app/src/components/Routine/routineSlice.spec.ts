@@ -24,6 +24,8 @@ import routineReducer, {
   selectExerciseSets,
   selectExerciseSet,
   selectRepetition,
+  MINIMUM_COUNT,
+  MINIMUM_WEIGHT,
 } from './routineSlice';
 
 describe('routine reducer', () => {
@@ -82,7 +84,7 @@ describe('routine reducer', () => {
         expect(selectExerciseSet(-1)(rootState)).toBeUndefined();
       });
 
-     it('should return undefined when index >max', () => {
+     it('should return undefined when index > max', () => {
         const routineState = addExerciseSets(initialState, [
           barbellCurl.id,
           barbellHipThrust.id,
@@ -110,11 +112,11 @@ describe('routine reducer', () => {
 
         expect(selectRepetition(/*exerciseSetIndex=*/0, /*repetitionIndex=*/0)(rootState)).toEqual({
           type: RepetitionType.COUNT,
-          count: 0,
+          count: MINIMUM_COUNT,
         });
       });
 
-      it('should return undefined when exerciseSetIndex <0', () => {
+      it('should return undefined when exerciseSetIndex < 0', () => {
         let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         routineState = routineReducer(routineState, addCountRepetition(0));
         const rootState = {
@@ -126,7 +128,7 @@ describe('routine reducer', () => {
         expect(selectRepetition(/*exerciseSetIndex=*/-1, /*repetitionIndex=*/0)(rootState)).toBeUndefined();
       });
 
-      it('should return undefined when exerciseSetIndex >max', () => {
+      it('should return undefined when exerciseSetIndex > max', () => {
         let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         routineState = routineReducer(routineState, addCountRepetition(0));
         const rootState = {
@@ -138,7 +140,7 @@ describe('routine reducer', () => {
         expect(selectRepetition(/*exerciseSetIndex=*/1, /*repetitionIndex=*/0)(rootState)).toBeUndefined();
       });
 
-     it('should return undefined when repetitionIndex <0', () => {
+     it('should return undefined when repetitionIndex < 0', () => {
         let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         routineState = routineReducer(routineState, addCountRepetition(0));
         const rootState = {
@@ -150,7 +152,7 @@ describe('routine reducer', () => {
         expect(selectRepetition(/*exerciseSetIndex=*/0, /*repetitionIndex=*/-1)(rootState)).toBeUndefined();
       });
 
-      it('should return undefined when repetitionIndex >max', () => {
+      it('should return undefined when repetitionIndex > max', () => {
         let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         routineState = routineReducer(routineState, addCountRepetition(0));
         const rootState = {
@@ -347,7 +349,7 @@ describe('routine reducer', () => {
             repetitions: [
               {
                 type: RepetitionType.COUNT,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
@@ -372,7 +374,7 @@ describe('routine reducer', () => {
             repetitions: [
               {
                 type: RepetitionType.COUNT,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
@@ -420,8 +422,8 @@ describe('routine reducer', () => {
               {
                 type: RepetitionType.WEIGHT,
                 unit: WeightUnit.POUNDS,
-                weight: 0,
-                count: 0,
+                weight: MINIMUM_WEIGHT,
+                count: MINIMUM_COUNT,
               },
             ],
           },
@@ -447,8 +449,8 @@ describe('routine reducer', () => {
               {
                 type: RepetitionType.WEIGHT,
                 unit: WeightUnit.POUNDS,
-                weight: 0,
-                count: 0,
+                weight: MINIMUM_WEIGHT,
+                count: MINIMUM_COUNT,
               },
             ],
           },
@@ -523,7 +525,7 @@ describe('routine reducer', () => {
               {
                 type: RepetitionType.WEIGHT,
                 unit: WeightUnit.POUNDS,
-                weight: 0,
+                weight: MINIMUM_WEIGHT,
                 count: 5,
               },
             ],
@@ -531,7 +533,7 @@ describe('routine reducer', () => {
         ]);
       });
 
-      it('should not set the count when new count is <0', () => {
+      it('should not set the count when new count is < MINIMUM_COUNT', () => {
         let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         state = routineReducer(state, addCountRepetition(0));
         state = routineReducer(state, setRepetitionCount({
@@ -542,7 +544,7 @@ describe('routine reducer', () => {
         state = routineReducer(state, setRepetitionCount({
           exerciseSetIndex: 0,
           repetitionIndex: 0,
-          count: -1,
+          count: MINIMUM_COUNT - 1,
         }));
 
         expect(state.exerciseSets).toEqual([
@@ -558,7 +560,7 @@ describe('routine reducer', () => {
         ]);
       });
 
-      it('should not set the count when exerciseSetIndex is <0', () => {
+      it('should not set the count when exerciseSetIndex is < 0', () => {
         let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         state = routineReducer(state, addCountRepetition(0));
         state = routineReducer(state, setRepetitionCount({
@@ -573,14 +575,14 @@ describe('routine reducer', () => {
             repetitions: [
               {
                 type: RepetitionType.COUNT,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
         ]);
       });
 
-      it('should not set the count when exerciseSetIndex is >max', () => {
+      it('should not set the count when exerciseSetIndex is > max', () => {
         let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         state = routineReducer(state, addCountRepetition(0));
         state = routineReducer(state, setRepetitionCount({
@@ -595,14 +597,14 @@ describe('routine reducer', () => {
             repetitions: [
               {
                 type: RepetitionType.COUNT,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
         ]);
       });
 
-      it('should not set the count when repetitionIndex is <0', () => {
+      it('should not set the count when repetitionIndex is < 0', () => {
         let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         state = routineReducer(state, addCountRepetition(0));
         state = routineReducer(state, setRepetitionCount({
@@ -617,14 +619,14 @@ describe('routine reducer', () => {
             repetitions: [
               {
                 type: RepetitionType.COUNT,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
         ]);
       });
 
-      it('should not set the count when repetitionIndex is >max', () => {
+      it('should not set the count when repetitionIndex is > max', () => {
         let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         state = routineReducer(state, addCountRepetition(0));
         state = routineReducer(state, setRepetitionCount({
@@ -639,7 +641,7 @@ describe('routine reducer', () => {
             repetitions: [
               {
                 type: RepetitionType.COUNT,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
@@ -665,7 +667,7 @@ describe('routine reducer', () => {
                 type: RepetitionType.WEIGHT,
                 unit: WeightUnit.POUNDS,
                 weight: 5,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
@@ -687,14 +689,14 @@ describe('routine reducer', () => {
             repetitions: [
               {
                 type: RepetitionType.COUNT,
-                count: 0,
+                count: MINIMUM_COUNT,
               },
             ],
           },
         ]);
       });
 
-      it('should not set the weight when new weight is <0', () => {
+      it('should not set the weight when new weight is < MINIMUM_WEIGHT', () => {
         let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         state = routineReducer(state, addWeightRepetition(0));
         const expectedState = routineReducer(state, setRepetitionWeight({
@@ -705,13 +707,13 @@ describe('routine reducer', () => {
         const actualState = routineReducer(expectedState, setRepetitionWeight({
           exerciseSetIndex: 0,
           repetitionIndex: 0,
-          weight: -1,
+          weight: MINIMUM_WEIGHT - 1,
         }));
 
         expect(expectedState).toEqual(actualState);
       });
 
-      it('should not set the weight when exerciseSetIndex is <0', () => {
+      it('should not set the weight when exerciseSetIndex is < 0', () => {
         const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         const expectedState = routineReducer(state, addWeightRepetition(0));
         const actualState = routineReducer(expectedState, setRepetitionWeight({
@@ -723,7 +725,7 @@ describe('routine reducer', () => {
         expect(expectedState).toEqual(actualState);
       });
 
-      it('should not set the weight when exerciseSetIndex is >max', () => {
+      it('should not set the weight when exerciseSetIndex is > max', () => {
         const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         const expectedState = routineReducer(state, addWeightRepetition(0));
         const actualState = routineReducer(expectedState, setRepetitionWeight({
@@ -735,7 +737,7 @@ describe('routine reducer', () => {
         expect(expectedState).toEqual(actualState);
       });
 
-      it('should not set the weight when repetitionIndex is <0', () => {
+      it('should not set the weight when repetitionIndex is < 0', () => {
         const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         const expectedState = routineReducer(state, addWeightRepetition(0));
         const actualState = routineReducer(expectedState, setRepetitionWeight({
@@ -747,7 +749,7 @@ describe('routine reducer', () => {
         expect(expectedState).toEqual(actualState);
       });
 
-      it('should not set the weight when repetitionIndex is >max', () => {
+      it('should not set the weight when repetitionIndex is > max', () => {
         const state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         const expectedState = routineReducer(state, addWeightRepetition(0));
         const actualState = routineReducer(expectedState, setRepetitionWeight({
