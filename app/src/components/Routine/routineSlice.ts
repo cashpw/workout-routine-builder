@@ -3,7 +3,10 @@ import type {
   ExerciseSet,
 } from 'types';
 
-import { RepetitionType } from 'types.d';
+import {
+  RepetitionType,
+  WeightUnit,
+} from 'types.d';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
@@ -57,6 +60,20 @@ export const routineSlice = createSlice({
         count: 0,
       })
     },
+    addWeightRepetition: (state, action: PayloadAction<number>) => {
+      const exerciseSetsIndex = action.payload;
+      if (exerciseSetsIndex < 0 || exerciseSetsIndex >= state.exerciseSets.length) {
+        // TODO: Handle error
+        return;
+      }
+
+      state.exerciseSets[exerciseSetsIndex].repetitions.push({
+        type: RepetitionType.WEIGHT,
+        unit: WeightUnit.POUNDS,
+        weight: 0,
+        count: 0,
+      })
+    },
   },
 });
 
@@ -65,6 +82,7 @@ export const selectName = (state: RootState) => state.routine.name;
 export const {
   addExerciseSet,
   addCountRepetition,
+  addWeightRepetition,
   removeExerciseSet,
 } = routineSlice.actions;
 export default routineSlice.reducer;

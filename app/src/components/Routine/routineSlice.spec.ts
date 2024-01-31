@@ -2,7 +2,10 @@ import type {
   ExerciseId,
 } from 'types';
 
-import { RepetitionType } from 'types.d';
+import {
+  RepetitionType,
+  WeightUnit,
+} from 'types.d';
 import {
   barbellCurl,
   barbellBenchPress,
@@ -13,6 +16,7 @@ import routineReducer, {
   RoutineState,
   addExerciseSet,
   addCountRepetition,
+  addWeightRepetition,
   removeExerciseSet,
 } from './routineSlice';
 
@@ -193,6 +197,82 @@ describe('routine reducer', () => {
     it('should not add a count repetition when index > max', () => {
       let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
       state = routineReducer(state, addCountRepetition(1));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [],
+        },
+      ]);
+    });
+  });
+
+  describe('addWeightRepetition', () => {
+    it('should add a weight repetition', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addWeightRepetition(0));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [
+            {
+              type: RepetitionType.WEIGHT,
+              unit: WeightUnit.POUNDS,
+              weight: 0,
+              count: 0,
+            },
+          ],
+        },
+      ]);
+    });
+
+   it('should add a weight repetition to the specified exerciseSet index', () => {
+      let state = addExerciseSets(initialState, [
+        barbellCurl.id,
+        barbellHipThrust.id,
+        barbellBenchPress.id,
+      ]);
+      state = routineReducer(state, addWeightRepetition(1));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [],
+        },
+        {
+          exerciseId: barbellHipThrust.id,
+          repetitions: [
+            {
+              type: RepetitionType.WEIGHT,
+              unit: WeightUnit.POUNDS,
+              weight: 0,
+              count: 0,
+            },
+          ],
+        },
+        {
+          exerciseId: barbellBenchPress.id,
+          repetitions: [],
+        },
+      ]);
+    });
+
+    it('should not add a weight repetition when index < 0', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addWeightRepetition(-1));
+
+      expect(state.exerciseSets).toEqual([
+        {
+          exerciseId: barbellCurl.id,
+          repetitions: [],
+        },
+      ]);
+    });
+
+    it('should not add a weight repetition when index > max', () => {
+      let state = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+      state = routineReducer(state, addWeightRepetition(1));
 
       expect(state.exerciseSets).toEqual([
         {
