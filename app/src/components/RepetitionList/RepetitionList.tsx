@@ -1,17 +1,12 @@
 import type { Repetition as RepetitionType } from 'types';
 
 import {
-  Button,
   Grid,
   List,
 } from '@mui/material';
-import { useAppDispatch } from 'app/hooks';
 
-import {
-  addCountRepetition,
-  addWeightRepetition,
-} from 'components/Routine/routineSlice';
 import RepetitionItem from 'components/RepetitionItem/RepetitionItem';
+import AddRepetitionButton from 'components/AddRepetitionButton/AddRepetitionButton';
 
 export interface RepetitionListProps {
   exerciseSetIndex: number;
@@ -23,7 +18,6 @@ export default function RepetitionList(props: RepetitionListProps) {
     exerciseSetIndex,
     repetitions,
   } = props;
-  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -45,18 +39,9 @@ export default function RepetitionList(props: RepetitionListProps) {
         item
         xs={12}
       >
-        <Button
-          variant="outlined"
-          onClick={() => dispatch(addCountRepetition(exerciseSetIndex))}
-        >
-          Add count repetition
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={() => dispatch(addWeightRepetition(exerciseSetIndex))}
-        >
-          Add weight repetition
-        </Button>
+        <AddRepetitionButton
+          exerciseSetIndex={exerciseSetIndex}
+        />
       </Grid>
     </>
   );

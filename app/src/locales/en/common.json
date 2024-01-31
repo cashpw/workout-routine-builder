@@ -1,4 +1,6 @@
 {
+  "addWeightRepetitionLabel": "Weight rep",
+  "addCountRepetitionLabel": "Counted rep",
   "routineTitle": "Routine",
   "weightLabel": "Weight",
   "countLabel": "Count",
