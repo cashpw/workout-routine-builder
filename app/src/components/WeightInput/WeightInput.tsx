@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import {
   IconButton,
-  OutlinedInput,
+  TextField,
   InputAdornment,
 } from '@mui/material';
 import {
@@ -49,22 +49,26 @@ export default function WeightInput(props: WeightInputProps) {
   return (
     <>
       <IconButton
-        onClick={onIncrement}
+        onClick={onDecrement}
       >
-        <AddBoxIcon />
+        <MinusSquareIcon />
       </IconButton>
-      <OutlinedInput
+      <TextField
+        variant="outlined"
+        label="Weight"
         value={value}
         size="small"
-        endAdornment={<InputAdornment position="end">{translatedWeightUnitAbbreviation}</InputAdornment>}
+        InputProps={{
+          endAdornment: <InputAdornment position="end">{translatedWeightUnitAbbreviation}</InputAdornment>
+        }}
         sx={{
           width: `${inputWidth}ch`,
         }}
       />
       <IconButton
-        onClick={onDecrement}
+        onClick={onIncrement}
       >
-        <MinusSquareIcon />
+        <AddBoxIcon />
       </IconButton>
     </>
   );

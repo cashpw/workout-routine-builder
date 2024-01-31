@@ -4,9 +4,7 @@ import {
   Button,
   Grid,
 } from '@mui/material';
-import {
-  useAppDispatch,
-} from 'app/hooks';
+import { useAppDispatch } from 'app/hooks';
 
 import {
   addCountRepetition,
@@ -33,7 +31,8 @@ export default function RepetitionList(props: RepetitionListProps) {
       {repetitions.map((repetition, index) => (
         <RepetitionItem
           key={index}
-          repetition={repetition}
+          exerciseSetIndex={exerciseSetIndex}
+          repetitionIndex={index}
         />
       ))}
       <Grid

@@ -1,6 +1,6 @@
 import {
   IconButton,
-  OutlinedInput,
+  TextField,
 } from '@mui/material';
 import {
   AddBox as AddBoxIcon,
@@ -30,11 +30,12 @@ export default function CountInput(props: CountInputProps) {
   return (
     <>
       <IconButton
-        onClick={onIncrement}
+        onClick={onDecrement}
       >
-        <AddBoxIcon />
+        <MinusSquareIcon />
       </IconButton>
-      <OutlinedInput
+      <TextField
+        label="Count"
         value={value}
         size="small"
         sx={{
@@ -42,9 +43,9 @@ export default function CountInput(props: CountInputProps) {
         }}
       />
       <IconButton
-        onClick={onDecrement}
+        onClick={onIncrement}
       >
-        <MinusSquareIcon />
+        <AddBoxIcon />
       </IconButton>
     </>
   );
