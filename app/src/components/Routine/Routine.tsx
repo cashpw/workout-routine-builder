@@ -21,6 +21,7 @@ import {
 import exercisesAsList from 'exercises/asList';
 import AddExerciseDialog from 'components/AddExerciseDialog/AddExerciseDialog';
 import RoutineItems from 'components/RoutineItems/RoutineItems';
+import RoutineMuscles from 'components/RoutineMuscles/RoutineMuscles';
 
 export default function Routine() {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ export default function Routine() {
       <CardHeader
         title={t('routineTitle')}
       />
+      <RoutineMuscles />
       {exerciseSets.length > 0 && (
         <CardContent>
           <RoutineItems
