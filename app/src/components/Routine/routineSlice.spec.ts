@@ -21,7 +21,7 @@ import routineReducer, {
   setRepetitionWeight,
   removeExerciseSet,
   removeRepetition,
-  selectPrimaryMuscles,
+  selectTargetMuscles,
   selectExerciseSets,
   selectExerciseSet,
   selectRepetition,
@@ -187,8 +187,8 @@ describe('routine reducer', () => {
       });
     });
 
-    describe('selectPrimaryMuscles', () => {
-      it('should return primary muscles in a exercise sets', () => {
+    describe('selectTargetMuscles', () => {
+      it('should return target muscles in a exercise sets', () => {
         let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
         const rootState = {
           routine: {
@@ -196,10 +196,10 @@ describe('routine reducer', () => {
           },
         };
 
-        expect(selectPrimaryMuscles(rootState)).toEqual(["biceps"]);
+        expect(selectTargetMuscles(rootState)).toEqual(["biceps"]);
       });
 
-     it('should return primary muscles in multiple exercise sets', () => {
+     it('should return target muscles in multiple exercise sets', () => {
         const routineState = addExerciseSets(initialState, [
           barbellCurl.id,
           barbellHipThrust.id,
@@ -211,7 +211,7 @@ describe('routine reducer', () => {
           },
         };
 
-       expect(selectPrimaryMuscles(rootState).sort()).toEqual([
+       expect(selectTargetMuscles(rootState).sort()).toEqual([
           "biceps",
           "chest",
           "glutes",

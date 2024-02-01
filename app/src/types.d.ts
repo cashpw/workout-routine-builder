@@ -15,7 +15,7 @@ export interface Exercise {
   name: ExerciseName;
 
   // TODO: Define Muscle enum type
-  primaryMuscles: string[];
+  targetMuscles: string[];
 
   // Valid repetition types for this exercise
   repetitionTypes: RepetitionType[];

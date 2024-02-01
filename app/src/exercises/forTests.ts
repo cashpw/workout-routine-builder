@@ -3,20 +3,20 @@ import type { Exercise } from 'types';
 export const barbellCurl: Exercise = {
   id: 1,
   name: 'barbellcurl',
-  primaryMuscles: ["biceps"],
+  targetMuscles: ["biceps"],
   repetitionTypes: [],
 };
 
 export const barbellBenchPress: Exercise = {
   id: 2,
   name: 'barbellbenchpress',
-  primaryMuscles: ["chest"],
+  targetMuscles: ["chest"],
   repetitionTypes: [],
 };
 
 export const barbellHipThrust: Exercise = {
   id: 3,
   name: 'barbellhipthrust',
-  primaryMuscles: ["glutes"],
+  targetMuscles: ["glutes"],
   repetitionTypes: [],
 };
