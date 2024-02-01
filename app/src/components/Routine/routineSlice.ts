@@ -161,6 +161,20 @@ export const routineSlice = createSlice({
   },
 });
 
+export const selectPrimaryMuscles = (state: RootState) => {
+  const sets = selectExerciseSets(state);
+  const muscleMap =  sets.reduce((acc: {[key: string]: boolean}, { exerciseId }) => {
+      exercisesById[exerciseId].primaryMuscles.forEach((muscle) => {
+        if (!(muscle in acc)) {
+          acc[muscle] = true;
+        }
+      })
+
+    return acc;
+  }, {});
+
+  return Object.keys(muscleMap);
+};
 export const selectExerciseSets = (state: RootState) => state.routine.exerciseSets;
 export const selectExerciseSet = (index: number) => (state: RootState) => {
   if (!isValidIndex(index, state.routine.exerciseSets)) {

@@ -21,6 +21,7 @@ import routineReducer, {
   setRepetitionWeight,
   removeExerciseSet,
   removeRepetition,
+  selectPrimaryMuscles,
   selectExerciseSets,
   selectExerciseSet,
   selectRepetition,
@@ -183,6 +184,38 @@ describe('routine reducer', () => {
           { exerciseId: barbellHipThrust.id, repetitions: [] },
           { exerciseId: barbellBenchPress.id, repetitions: [] },
         ]);
+      });
+    });
+
+    describe('selectPrimaryMuscles', () => {
+      it('should return primary muscles in a exercise sets', () => {
+        let routineState = routineReducer(initialState, addExerciseSet(barbellCurl.id));
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+        expect(selectPrimaryMuscles(rootState)).toEqual(["biceps"]);
+      });
+
+     it('should return primary muscles in multiple exercise sets', () => {
+        const routineState = addExerciseSets(initialState, [
+          barbellCurl.id,
+          barbellHipThrust.id,
+          barbellBenchPress.id,
+        ]);
+        const rootState = {
+          routine: {
+            ...routineState,
+          },
+        };
+
+       expect(selectPrimaryMuscles(rootState).sort()).toEqual([
+          "biceps",
+          "chest",
+          "glutes",
+       ].sort());
       });
     });
   });

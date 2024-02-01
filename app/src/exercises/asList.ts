@@ -9,10 +9,12 @@ import exercises from './exercises.json';
 const exerciseList: Exercise[] = exercises.all.map(({
   id,
   name,
+  primaryMuscles,
   repetitionTypes,
 }) => ({
   id,
   name,
+  primaryMuscles,
   repetitionTypes: repetitionTypes.map(key => RepetitionType[key as RepetitionTypeStrings]),
 }));
 

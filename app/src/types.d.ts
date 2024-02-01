@@ -14,6 +14,9 @@ export interface Exercise {
   // A unique identifier for i18n
   name: ExerciseName;
 
+  // TODO: Define Muscle enum type
+  primaryMuscles: string[];
+
   // Valid repetition types for this exercise
   repetitionTypes: RepetitionType[];
 }
