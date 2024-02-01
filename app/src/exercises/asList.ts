@@ -1,5 +1,7 @@
 import type { Exercise } from 'types';
 import {
+  MuscleType,
+  MuscleTypeStrings,
   RepetitionType,
   RepetitionTypeStrings,
 } from 'types.d';
@@ -14,7 +16,7 @@ const exerciseList: Exercise[] = exercises.all.map(({
 }) => ({
   id,
   name,
-  targetMuscles,
+  targetMuscles: targetMuscles.map(key => MuscleType[key as MuscleTypeStrings]),
   repetitionTypes: repetitionTypes.map(key => RepetitionType[key as RepetitionTypeStrings]),
 }));
 

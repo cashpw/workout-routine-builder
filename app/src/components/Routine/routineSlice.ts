@@ -8,6 +8,7 @@ import type {
 import {
   RepetitionType,
   WeightUnit,
+  MuscleType,
 } from 'types.d';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -162,19 +163,16 @@ export const routineSlice = createSlice({
   },
 });
 
-function getTargetMuscles(routine: Routine): string[] {
-  return Array.from(routine.exerciseSets.reduce((
-    acc: Set<string>,
-    { exerciseId }
-  ) => {
+function getTargetMuscles(routine: Routine): MuscleType[] {
+  return Array.from(routine.exerciseSets.reduce((acc: Set<MuscleType>, { exerciseId }) => {
     exercisesById[exerciseId].targetMuscles.forEach((muscle) => {
       acc.add(muscle);
     });
 
     return acc;
-  }, new Set<string>()));
+  }, new Set<MuscleType>()));
 }
-export const selectTargetMuscles = (state: RootState): string[] => {
+export const selectTargetMuscles = (state: RootState): MuscleType[] => {
   return getTargetMuscles(state.routine);
 };
 export const selectExerciseSets = (state: RootState) => state.routine.exerciseSets;

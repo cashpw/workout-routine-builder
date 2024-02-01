@@ -1,17 +1,22 @@
+import { useTranslation } from 'react-i18next';
+
+import { MuscleType } from 'types.d';
 import { selectTargetMuscles } from 'components/Routine/routineSlice';
 import { useAppSelector } from 'app/hooks';
 
 export default function RoutineMuscles() {
   const targetMuscles = useAppSelector(selectTargetMuscles);
+  const { t } = useTranslation();
+
   return (
     <>
       Target muscles:
       <ul>
-        {targetMuscles.map((muscle, index) => (
+        {targetMuscles.map((muscleType, index) => (
           <li
             key={index}
           >
-            {muscle}
+            {t(`muscleType${MuscleType[muscleType]}`)}
           </li>
         ))}
       </ul>

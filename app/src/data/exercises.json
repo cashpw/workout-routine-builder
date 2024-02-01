@@ -4,7 +4,7 @@
       "id": 1,
       "name": "barbellcurl",
       "targetMuscles": [
-        "biceps"
+        "BICEP"
       ],
       "repetitionTypes": [
         "WEIGHT",
@@ -15,7 +15,7 @@
       "id": 2,
       "name": "barbellbenchpress",
       "targetMuscles": [
-        "chest"
+        "CHEST"
       ],
       "repetitionTypes": [
         "WEIGHT",
@@ -26,7 +26,7 @@
       "id": 3,
       "name": "barbellhipthrust",
       "targetMuscles": [
-        "glutes"
+        "GLUTE"
       ],
       "repetitionTypes": [
         "WEIGHT",

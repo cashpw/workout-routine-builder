@@ -1,4 +1,7 @@
 {
+  "muscleTypeGLUTE": "Glute",
+  "muscleTypeBICEP": "Bicep",
+  "muscleTypeCHEST": "Chest",
   "addWeightRepetitionLabel": "Weight rep",
   "addCountRepetitionLabel": "Counted rep",
   "routineTitle": "Routine",

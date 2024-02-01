@@ -5,6 +5,7 @@ import type {
 import {
   RepetitionType,
   WeightUnit,
+  MuscleType,
 } from 'types.d';
 import {
   barbellCurl,
@@ -196,7 +197,9 @@ describe('routine reducer', () => {
           },
         };
 
-        expect(selectTargetMuscles(rootState)).toEqual(["biceps"]);
+        expect(selectTargetMuscles(rootState)).toEqual([
+          MuscleType.BICEP,
+        ]);
       });
 
      it('should return target muscles in multiple exercise sets', () => {
@@ -212,9 +215,9 @@ describe('routine reducer', () => {
         };
 
        expect(selectTargetMuscles(rootState).sort()).toEqual([
-          "biceps",
-          "chest",
-          "glutes",
+          MuscleType.BICEP,
+          MuscleType.GLUTE,
+          MuscleType.CHEST,
        ].sort());
       });
     });

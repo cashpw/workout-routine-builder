@@ -1,22 +1,29 @@
 import type { Exercise } from 'types';
+import { MuscleType } from 'types.d';
 
 export const barbellCurl: Exercise = {
   id: 1,
   name: 'barbellcurl',
-  targetMuscles: ["biceps"],
+  targetMuscles: [
+    MuscleType.BICEP,
+  ],
   repetitionTypes: [],
 };
 
 export const barbellBenchPress: Exercise = {
   id: 2,
   name: 'barbellbenchpress',
-  targetMuscles: ["chest"],
+  targetMuscles: [
+    MuscleType.CHEST,
+  ],
   repetitionTypes: [],
 };
 
 export const barbellHipThrust: Exercise = {
   id: 3,
   name: 'barbellhipthrust',
-  targetMuscles: ["glutes"],
+  targetMuscles: [
+    MuscleType.GLUTE,
+  ],
   repetitionTypes: [],
 };
