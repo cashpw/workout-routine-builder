@@ -29,7 +29,7 @@ export interface SplitButtonProps {
 export default function SplitButton(props: SplitButtonProps) {
   const { options } = props;
   const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const anchorRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
