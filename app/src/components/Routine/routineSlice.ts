@@ -1,5 +1,6 @@
 import type {
   ExerciseId,
+  Routine,
   ExerciseSet,
   WeightRepetition,
 } from 'types';
@@ -161,19 +162,23 @@ export const routineSlice = createSlice({
   },
 });
 
-export const selectPrimaryMuscles = (state: RootState) => {
-  const sets = selectExerciseSets(state);
-  const muscleMap =  sets.reduce((acc: {[key: string]: boolean}, { exerciseId }) => {
-      exercisesById[exerciseId].primaryMuscles.forEach((muscle) => {
-        if (!(muscle in acc)) {
-          acc[muscle] = true;
-        }
-      })
+function getPrimaryMuscles(routine: Routine) {
+  const muscleMap =  routine.exerciseSets.reduce((
+    acc: {[key: string]: boolean},
+    { exerciseId }
+  ) => {
+    exercisesById[exerciseId].primaryMuscles.forEach((muscle) => {
+      acc[muscle] = true;
+    });
 
     return acc;
   }, {});
 
   return Object.keys(muscleMap);
+}
+
+export const selectPrimaryMuscles = (state: RootState) => {
+  return getPrimaryMuscles(state.routine);
 };
 export const selectExerciseSets = (state: RootState) => state.routine.exerciseSets;
 export const selectExerciseSet = (index: number) => (state: RootState) => {

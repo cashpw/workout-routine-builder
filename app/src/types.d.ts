@@ -52,3 +52,7 @@ export interface ExerciseSet {
   exerciseId: ExerciseId;
   repetitions: Repetition[];
 }
+
+export interface Routine {
+  exerciseSets: ExerciseSet[];
+}
