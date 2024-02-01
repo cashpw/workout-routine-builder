@@ -4,7 +4,7 @@ import {
   RepetitionTypeStrings,
 } from 'types.d';
 
-import exercises from './exercises.json';
+import exercises from 'data/exercises.json';
 
 const exerciseList: Exercise[] = exercises.all.map(({
   id,
