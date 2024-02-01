@@ -162,21 +162,19 @@ export const routineSlice = createSlice({
   },
 });
 
-function getTargetMuscles(routine: Routine) {
-  const muscleMap =  routine.exerciseSets.reduce((
-    acc: {[key: string]: boolean},
+function getTargetMuscles(routine: Routine): string[] {
+  return Array.from(routine.exerciseSets.reduce((
+    acc: Set<string>,
     { exerciseId }
   ) => {
     exercisesById[exerciseId].targetMuscles.forEach((muscle) => {
-      acc[muscle] = true;
+      acc.add(muscle);
     });
 
     return acc;
-  }, {});
-
-  return Object.keys(muscleMap);
+  }, new Set<string>()));
 }
-export const selectTargetMuscles = (state: RootState) => {
+export const selectTargetMuscles = (state: RootState): string[] => {
   return getTargetMuscles(state.routine);
 };
 export const selectExerciseSets = (state: RootState) => state.routine.exerciseSets;
